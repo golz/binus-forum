@@ -7,7 +7,7 @@
             <ul class="site-nav" role="menubar">
 
                 <li class="breadcrumbs">
-                    <span class="crumb"><a href="{{ url('/') }}" data-navbar-reference="index">Board index</a></span>
+                    <span class="crumb"><a href="{{ route('home') }}">Board index</a></span>
                 </li>
 
                 @include('partials.burger-menu')

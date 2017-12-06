@@ -12,10 +12,10 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('topic/{id}', 'TopicController@index');
+Route::get('thread/{id}', 'ThreadController@index');
 
 Route::get('/clear-cache', 'UtilityController@clearCache');
-
-
 
 // Login Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

@@ -9,7 +9,7 @@
 
 
             <ul id="site-menu">
-                <li data-skip-responsive="true" class="site-menu"><a href="./faq.php?style=5" rel="help" title="Frequently Asked Questions">FAQ</a></li>
+                {{--<li data-skip-responsive="true" class="site-menu"><a href="./faq.php?style=5" rel="help" title="Frequently Asked Questions">FAQ</a></li>--}}
 
                 @guest
                     <li class="font-icon rightside"  data-skip-responsive="true">

@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>BIFOR - Binus Forum</title>
 
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
@@ -18,6 +21,8 @@
 
     <link href="{{ asset('css/stylesheet.css') }}" rel="stylesheet" type="text/css" media="screen, projection" />
     <link href="{{ asset('css/colours.css') }}" rel="stylesheet" type="text/css" media="screen, projection" />
+
+
 
 </head>
 <body id="bifor" class="nojs notouch section-index ltr ">

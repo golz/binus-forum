@@ -63,24 +63,23 @@
                     <div class="side-block-body" id="sidebar-recent-posts"></div>
                 </div>
             </div>{{--End Sidebar--}}
+            @foreach($types as $type)
 
             <div id="forumlist">{{--Begin Forum List--}}
-
                 <div id="forumlist-inner">
 
                     <div class="forabg">
                         <div class="inner">
+
                             <ul class="topiclist">
                                 <li class="header">
-
                                     <dl class="icon">
-                                        <dt><div class="list-inner"><a href="">Main</a></div></dt>
+                                        <dt><div class="list-inner"><a href="">{{$type->name}}</a></div></dt>
                                     </dl>
-
                                 </li>
                             </ul>
                             <ul class="topiclist forums">
-
+                                @foreach($type->topics as $topic)
                                 <li class="row">
                                     <dl class="icon forum_read">
                                         <dt title="No unread posts">
@@ -89,7 +88,7 @@
 
                                         <div class="list-inner">
                                             <!-- <a class="feed-icon-forum" title="Feed - Informations" href="http://gramziu.pl/phpBB/feed.php?f=2"><img src="./styles/anami/theme/images/feed.gif" alt="Feed - Informations" /></a> -->
-                                            <a href="{{ url('topic/1502') }}" class="forumtitle">TESTING KLIK INI DULU</a>
+                                            <a href="{{ url('topic/1502') }}" class="forumtitle">{{$topic->title}}</a>
                                             <br />Everything you should know.
                                             <div class="responsive-show" style="display: none;">
                                                 Topics: <strong>2</strong>
@@ -108,8 +107,8 @@
                                         </dd>
                                     </dl>
                                 </li>
-
-
+                                @endforeach
+<!--
 
 
                                 <li class="row">
@@ -118,9 +117,9 @@
 
                                             <span class="ico_forum_read_locked"></span>
 
-                                        <div class="list-inner">
+                                        <div class="list-inner"> -->
                                             <!-- <a class="feed-icon-forum" title="Feed - General examples" href="http://gramziu.pl/phpBB/feed.php?f=3"><img src="./styles/anami/theme/images/feed.gif" alt="Feed - General examples" /></a> -->
-                                            <a href="" class="forumtitle">The lounge</a>
+<!--                                            <a href="" class="forumtitle">The lounge</a>
                                             <br />Examples of topics, you can see here how everything works.
                                             <div class="responsive-show" style="display: none;">
                                                 Topics: <strong>6</strong>
@@ -140,10 +139,12 @@
                                         </dd>
                                     </dl>
                                 </li>
+                                -->
                             </ul>
                         </div>
                     </div>
-
+@endforeach
+<!--
                     <div class="forabg">
                         <div class="inner">
                             <ul class="topiclist">
@@ -196,9 +197,9 @@
 
                                             <span class="ico_forum_read_subforum"></span>
 
-                                        <div class="list-inner">
+                                        <div class="list-inner">-->
                                             <!-- <a class="feed-icon-forum" title="Feed - Forum with long description and subforums" href="http://gramziu.pl/phpBB/feed.php?f=12"><img src="./styles/anami/theme/images/feed.gif" alt="Feed - Forum with long description and subforums" /></a> -->
-                                            <a href="" class="forumtitle">School of Information System</a>
+<!--                                            <a href="" class="forumtitle">School of Information System</a>
 
                                             <br />Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                             <br />
@@ -234,7 +235,7 @@
                 </div>
             </div>{{--End Forum List--}}
         </div>
-
+-->
         <div id="site-footer-area">
             <div class="chunk">
 

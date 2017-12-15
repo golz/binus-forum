@@ -88,23 +88,27 @@
 
                                         <div class="list-inner">
                                             <!-- <a class="feed-icon-forum" title="Feed - Informations" href="http://gramziu.pl/phpBB/feed.php?f=2"><img src="./styles/anami/theme/images/feed.gif" alt="Feed - Informations" /></a> -->
-                                            <a href="{{ url('topic/1502') }}" class="forumtitle">{{$topic->title}}</a>
-                                            <br />Everything you should know.
+                                            <a href="{{ url('topic/'.$topic->id) }}" class="forumtitle">{{$topic->title}}</a>
+                                            <br />{{$topic->description}}.
                                             <div class="responsive-show" style="display: none;">
                                                 Topics: <strong>2</strong>
                                             </div>
                                         </div>
                                         </dt>
-                                        <dd class="topics">2<dfn>Topics</dfn></dd>
-                                        <dd class="posts">2<dfn>Posts</dfn></dd>
+                                        <dd class="topics">2<!--TODO count thread--><dfn>Topics</dfn></dd>
+                                        <dd class="posts">2<dfn>Posts<!--TODO count all post--></dfn></dd>
+
                                         <dd class="lastpost">
                                             <dfn>Last post</dfn>
-                                            <a href="" title="Welcome" class="lastsubject">Welcome</a>
+                                            <!--<a href="" title="Welcome" class="lastsubject">Welcome</a>
                                             <br />
                                             by
                                             <a href="" style="color: #AA0000;" class="username-coloured">Goldwin</a>
+                                            -->
+                                            <!--TODO disini tambahnin lastpost $topic->thread::orderBy('created_at', 'desc')->first();-->
                                             24 Feb 2015, 21:50
                                         </dd>
+
                                     </dl>
                                 </li>
                                 @endforeach

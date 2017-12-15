@@ -17,6 +17,7 @@ class CreateTopicsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->integer('type_id')->unsigned();
+            $table->text('description');
 
             $table->timestamps();
         });

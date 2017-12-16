@@ -15,13 +15,17 @@ class CreateThreadsTable extends Migration
     {
         Schema::create('threads', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('topic_id')->unsigned();
-            $table->foreign('topic_id')
-                ->references('id')
-                ->on('topics');
-            $table->string('title');
+            $table->integer('topic_id')->unsigned()->nullable();;
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('set null');
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->text('title');
+            $table->longText('content');
             $table->integer('view');
-            $table->text('content');
+            $table->integer('rating');
+            $table->boolean('is_announcement');
+            $table->string('status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

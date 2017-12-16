@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'role_id', 'fullname', 'username', 'nim', 'email', 'dob', 'image', 'password'
     ];
 
     /**
@@ -27,8 +27,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function threads()
-    {
+    public function threads(){
         return $this->hasMany('App\Thread');
+    }
+
+    public function replies(){
+        return $this->hasMany('App\Reply');
+    }
+
+    public function role(){
+        return $this->hasOne('App\Role');
+    }
+
+    public function topicModerators(){
+        return $this->hasMany('App\TopicModerator');
     }
 }

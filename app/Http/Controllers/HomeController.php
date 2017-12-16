@@ -24,9 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $types = Type::all();
 
-
-        $types=Type::all();
-        return view('home')->with('types',$types);
+        return view('home', compact('types'));
     }
 }

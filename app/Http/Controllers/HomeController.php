@@ -26,6 +26,7 @@ class HomeController extends Controller
     {
         $types = Type::all();
 
+        //TODO: Kalkulasi total dari semua post
         return view('home', compact('types'));
     }
 }

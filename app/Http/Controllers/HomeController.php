@@ -46,7 +46,7 @@ class HomeController extends Controller
 
         foreach(User::all() as $user){
             if($user->isOnline()){
-                $totalOnline++;
+                $totalOnline+=1;
             }
         }
 

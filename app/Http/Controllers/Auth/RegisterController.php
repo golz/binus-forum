@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -48,8 +49,14 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'fullname' => 'required|string|min:5|max:50',
+            'nickname' => 'required|string|unique:users,nickname|min:3|max:20|alpha_dash',
+            'nim' => 'required|string|unique:users,nim|min:10|max:10',
             'email' => 'required|string|email|max:255|unique:users',
+            'bday_day' => 'required|numeric|min:1',
+            'bday_month' => 'required|numeric|min:1',
+            'bday_year' => 'required|numeric|min:1',
+            'image' => 'image',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -62,9 +69,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $file_name = 'default.jpg';
+        if(Input::hasFile('image')) {
+            if (Input::file('image')->isValid()) {
+                $destinationPath = public_path('uploads/profile');
+                $extension = Input::file('image')->getClientOriginalExtension();
+                $fileName = uniqid() . '.' . $extension;
+
+                Input::file('image')->move($destinationPath, $fileName);
+            }
+        }
+        $dob = $data['bday_year'] . '/' . $data['bday_month'] . '/' . $data['bday_day'];
         return User::create([
-            'name' => $data['name'],
+            'role_id' => 2,
+            'fullname' => $data['fullname'],
+            'nickname' => $data['nickname'],
+            'nim' => $data['nim'],
             'email' => $data['email'],
+            'dob' => $dob,
+            'image' => $file_name,
             'password' => bcrypt($data['password']),
         ]);
     }

@@ -9,6 +9,7 @@ class TopicController extends Controller
 {
     public function index($id){
         $topic=Topic::find($id);
-        return view('topic')->with('topic',$topic);
+
+        return view('topic', compact('topic'));
     }
 }

@@ -8,7 +8,7 @@
 
                 <li class="breadcrumbs">
                     <span class="crumb"><a href="{{ route('home') }}">Board index</a></span>
-                    <span class="crumb"><a href="">NAMA TOPIC</a></span>
+                    <span class="crumb"><a href="">{{$topic->title}}</a></span>
                 </li>
 
                 @include('partials.burger-menu')
@@ -24,7 +24,7 @@
 
             <div id="subhead-title">
 
-                <h2 class="forum-title">Judul Topic</h2>
+                <h2 class="forum-title">{{$topic->title}}</h2>
 
             </div>
 
@@ -126,7 +126,7 @@
                                             <span class="ico_topic_read"></span>
 
                                         <div class="list-inner">
-                                            <a href="{{ url('thread/1999') }}" class="topictitle">TESTING YANG INI AJA</a><br />
+                                            <a href="{{ url('topic/'.$topic->id.'/thread/1999') }}" class="topictitle">TESTING YANG INI AJA</a><br />
 
                                             by <a href="" style="color: #AA0000;" class="username-coloured">Goldwin</a> &raquo; 24 Feb 2015, 20:20
                                             <div class="r-lastpost-container">

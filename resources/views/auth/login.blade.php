@@ -55,7 +55,7 @@
                                     </div>
                                     <dt><label for="password">Password:</label></dt>
                                     <dd><input type="password" tabindex="2" id="password" name="password" size="25" class="inputbox autowidth" autocomplete="off"></dd>
-                                    <dd><a href="{{ route('password.request') }}">I forgot my password</a></dd>															</dl>
+{{--                                    <dd><a href="{{ route('password.request') }}">I forgot my password</a></dd>															</dl>--}}
                                 <dl>
                                     <dd><label for="autologin"><input type="checkbox" name="autologin" id="autologin" tabindex="4"> Remember me</label></dd>
                                 </dl>

@@ -20,11 +20,14 @@
 
     <div id="wrap-body">
         <div class="chunk-main">
-            <div id="sidebar">{{--Begin Sidebar--}}
+
+            {{--Begin Sidebar--}}
+            <div id="sidebar">
                 <div class="side-block">
                     <img src="{{ asset('images/greater-nusantara.png') }}" alt="Greater Nusantara" style="border-radius: 3px;padding:30px;filter:grayscale(100%);">
                 </div>
 
+                @if(!Auth::check())
                 <div class="side-block side-login">
                     <form method="post" action="{{ route('login') }}">
                         {{ csrf_field() }}
@@ -57,6 +60,7 @@
                         </div>
                     </form>
                 </div>
+                @endif
 
                 <div class="side-block">
                     <h4 class="side-block-head">Threads</h4>
@@ -70,9 +74,12 @@
                         @endforeach
                     </div>
                 </div>
-            </div>{{--End Sidebar--}}
 
-            <div id="forumlist">{{--Begin Forum List--}}
+            </div>
+            {{--End Sidebar--}}
+
+            {{--Begin Forum List--}}
+            <div id="forumlist">
                 <div id="forumlist-inner">
 
                     @foreach($types as $type)
@@ -141,7 +148,9 @@
                     @endforeach
 
                 </div>
-            </div>{{--End Forum List--}}
+            </div>
+            {{--End Forum List--}}
+
         </div>
 
         <div id="site-footer-area">
@@ -155,7 +164,17 @@
                         {{--<br />Most users ever online was <strong>51</strong> on 11 Apr 2017, 10:11--}}
                         <br /> <br /> <br /> <br />
                         Registered users:
-
+                        @if($users)
+                            @foreach($users as $user)
+                                @if($user->isOnline())
+                                    @if($user == $users->first())
+                                        <a href="#">{{$user->nickname}}</a>
+                                    @else
+                                        , <a href="#">{{$user->nickname}}</a>
+                                    @endif
+                                @endif
+                            @endforeach
+                        @endif
                         <br />Legend:
                         <a style="color:#AA0000" href="">Administrators</a>,
                         <a style="color:#00AA00" href="">Global moderators</a>,
@@ -166,7 +185,7 @@
 
                 <div class="grid-3">
                     <h5>About us</h5>
-                    <p>BIFOR was formed as a forum for discussion to the Bina Nusantara University's students to discuss the information being trending at the time, these things can be tasks, important information such as events, and so forth. <br /> <br /> In addition to acting as a means of communication among students, they can also see direct notifications from each department so that the information provided is very accurate and does not cause confusion that often occurs in our beloved university and there is also a feature to view the schedule of each lecture.</p>
+                    <p><strong>BIFOR</strong> was formed as a forum for discussion to the Bina Nusantara University's students to discuss the information being trending at the time, these things can be tasks, important information such as events, and so forth. <br /> <br /> In addition to acting as a means of communication among students, they can also see direct notifications from each department so that the information provided is very accurate and does not cause confusion that often occurs in our beloved university and there is also a feature to view the schedule of each lecture.</p>
                 </div>
                 <div class="grid-3">
                     <h5>You Must Know</h5>

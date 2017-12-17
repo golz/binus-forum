@@ -24,9 +24,9 @@
                     </li>
                 @else
                     <li class="font-icon rightside"  data-skip-responsive="true">
-                        <a href="{{ route('logout') }}" title="Logout" accesskey="x" role="menuitem"><i class="fa fa-power-off"></i>
-                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                        <a href="{{ route('logout') }}" title="Logout" accesskey="x" role="menuitem" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>
+
                             <span class="nav-rh-2">Logout</span>
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

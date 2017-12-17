@@ -63,11 +63,11 @@
                 @endif
 
                 <div class="side-block">
-                    <h4 class="side-block-head">Threads</h4>
+                    <h4 class="side-block-head">Recent Threads</h4>
                     <div class="side-block-body" id="sidebar-recent-posts">
                         @foreach($lastFivePosts as $lastFivePost)
                         <div>
-                            <a class="sidebar-recent-title" href="">{{$lastFivePost->title}}</a>
+                            <a class="sidebar-recent-title" href="{{ url('topic/'.$lastFivePost->topic->id.'/thread/'.$lastFivePost->id) }}">{{$lastFivePost->title}}</a>
                             <span class="sidebar-recent-author">by {{$lastFivePost->user->nickname}}</span>
                             <span class="sidebar-recent-content">{{trim(substr($lastFivePost->content,0,50))}}...</span>
                         </div>
@@ -98,7 +98,7 @@
 
                                 <li class="row">
                                     <dl class="icon forum_read">
-                                        <dt title="No unread posts">
+                                        <dt title="{{$topic->title}}">
 
                                             <span class="ico_forum_read"></span>
 
@@ -131,7 +131,17 @@
                                         <dd class="posts">{{$postCount}}<dfn>Posts</dfn></dd>
                                         <dd class="lastpost">
                                             <dfn>Last thread</dfn>
-                                            <a href="" title="Welcome" class="lastsubject">{{$lastSubject == 'thread' ? $lastSubject->title : 'Re: ' . $lastSubject->title}}</a>
+
+                                            <a href="   @if($lastType == 'thread')
+                                                            {{url('topic/'.$lastSubject->topic->id.'/thread/'.$lastSubject->id)}}
+                                                        @else
+                                                            {{url('topic/'.$lastSubject->thread->topic->id.'/thread/'.$lastSubject->thread->id)}}
+                                                        @endif
+                                                "
+                                               title="@if($lastType == 'thread') {{$lastSubject->title}} @else {{$lastSubject->thread->title}} @endif"
+                                               class="lastsubject">
+                                                {{$lastType == 'thread' ? $lastSubject->title : 'Re: ' . $lastSubject->title}}
+                                            </a>
                                             <br />
                                             by
                                             <a href="" style="color: @if($lastSubject->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($lastSubject->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$lastSubject->user->nickname}}</a>

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Cache;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'role_id', 'fullname', 'username', 'nim', 'email', 'dob', 'image', 'password'
+        'role_id', 'fullname', 'nickname', 'nim', 'email', 'dob', 'image', 'password'
     ];
 
     /**
@@ -27,6 +28,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function isOnline(){
+        return Cache::has('user-is-online-' . $this->id);
+    }
+
     public function threads(){
         return $this->hasMany('App\Thread');
     }
@@ -36,7 +41,7 @@ class User extends Authenticatable
     }
 
     public function role(){
-        return $this->hasOne('App\Role');
+        return $this->belongsTo('App\Role');
     }
 
     public function topicModerators(){

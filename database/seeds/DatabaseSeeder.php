@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'role_id' => 1,
             'fullname' => 'Goldwin Japar',
-            'username' => 'golz',
+            'nickname' => 'golz',
             'nim' => '1901472631',
             'email' => 'golzwinsjapar@gmail.com',
             'dob' => '1998/02/15',
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'role_id' => 1,
             'fullname' => 'Nicholas Krisna Putratama Lusianto',
-            'username' => 'Zephkiel',
+            'nickname' => 'Zephkiel',
             'nim' => '1901487596',
             'email' => 'nicholaskrisnapl@gmail.com',
             'dob' => '1997/06/01',
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'role_id' => 2,
             'fullname' => 'Jefry',
-            'username' => 'jeffchange',
+            'nickname' => 'jeffchange',
             'nim' => '1901500585',
             'email' => 'jeffry.chang70@gmail.com',
             'dob' => '1996/10/21',
@@ -73,7 +73,22 @@ class DatabaseSeeder extends Seeder
         ]);
         Topic::create([
             'type_id' => 2,
+            'title' => 'Faculty of Engineering',
+            'description' => $faker->text($maxNbChars = 40)
+        ]);
+        Topic::create([
+            'type_id' => 2,
+            'title' => 'Faculty of Humanities',
+            'description' => $faker->text($maxNbChars = 40)
+        ]);
+        Topic::create([
+            'type_id' => 2,
             'title' => 'School of Computer Science',
+            'description' => $faker->text($maxNbChars = 40)
+        ]);
+        Topic::create([
+            'type_id' => 2,
+            'title' => 'School of Information Systems',
             'description' => $faker->text($maxNbChars = 40)
         ]);
         Topic::create([
@@ -84,6 +99,11 @@ class DatabaseSeeder extends Seeder
         Topic::create([
             'type_id' => 2,
             'title' => 'School of Design',
+            'description' => $faker->text($maxNbChars = 40)
+        ]);
+        Topic::create([
+            'type_id' => 2,
+            'title' => 'Graduate Program',
             'description' => $faker->text($maxNbChars = 40)
         ]);
 
@@ -100,7 +120,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 //      Thread - Usual
-        foreach(range(1, 20) as $index){
+        foreach(range(1, 30) as $index){
             Thread::create([
                 'topic_id' => $faker->numberBetween($min = 1, $max = Topic::all()->count()),
                 'user_id' => $faker->numberBetween($min = 1, $max = User::all()->count()),
@@ -114,7 +134,7 @@ class DatabaseSeeder extends Seeder
         }
 
 //      Reply - Usual
-        foreach(range(1, 40) as $index){
+        foreach(range(1, 60) as $index){
             Reply::create([
                 'thread_id' => $faker->numberBetween($min = 1, $max = Thread::all()->count()),
                 'user_id' => $faker->numberBetween($min = 1, $max = User::all()->count()),

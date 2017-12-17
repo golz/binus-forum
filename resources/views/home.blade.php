@@ -31,10 +31,10 @@
                         <h4 class="side-block-head"><a href="{{ route('login') }}">Login</a>&nbsp; &bull; &nbsp;<a href="{{ route('register') }}">Register</a></h4>
                         <div class="side-block-body">
                             <fieldset>
-                                <input type="text" tabindex="1" name="username" id="username" size="10" class="inputbox" title="Username" placeholder="Username" />
+                                <input type="text" tabindex="1" name="email" id="email" size="10" class="inputbox" title="Email" placeholder="Email" />
                                 <div class="error">
-                                    @if($errors->has('username'))
-                                        {{$errors->first('username')}}
+                                    @if($errors->has('email'))
+                                        {{$errors->first('email')}}
                                     @endif
                                 </div>
                                 <br />
@@ -59,8 +59,16 @@
                 </div>
 
                 <div class="side-block">
-                    <h4 class="side-block-head">Posts</h4>
-                    <div class="side-block-body" id="sidebar-recent-posts"></div>
+                    <h4 class="side-block-head">Threads</h4>
+                    <div class="side-block-body" id="sidebar-recent-posts">
+                        @foreach($lastFivePosts as $lastFivePost)
+                        <div>
+                            <a class="sidebar-recent-title" href="">{{$lastFivePost->title}}</a>
+                            <span class="sidebar-recent-author">by {{$lastFivePost->user->nickname}}</span>
+                            <span class="sidebar-recent-content">{{trim(substr($lastFivePost->content,0,50))}}...</span>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>{{--End Sidebar--}}
 
@@ -80,6 +88,7 @@
                             <ul class="topiclist forums">
 
                                 @foreach($type->topics as $topic)
+
                                 <li class="row">
                                     <dl class="icon forum_read">
                                         <dt title="No unread posts">
@@ -96,49 +105,36 @@
                                         </div>
                                         </dt>
                                         <dd class="topics">{{$topic->threads->count()}}<dfn>Threads</dfn></dd>
-                                        <dd class="posts">{{$topic->threads->count()}}<dfn>Posts</dfn></dd>
+                                        <?php
+                                            $postCount = 0;
+                                            foreach($topic->threads as $thread){
+                                                $postCount += 1;
+                                                $lastType = 'thread';
+                                                $lastSubject = $topic->threads->last();
+                                                foreach($thread->replies as $reply){
+                                                    $postCount +=1;
+                                                    if($reply->updated_at > $lastSubject->updated_at){
+                                                        $lastType = 'reply';
+                                                        $lastSubject = $reply;
+                                                    }
+                                                }
+                                            }
+
+                                        ?>
+                                        <dd class="posts">{{$postCount}}<dfn>Posts</dfn></dd>
                                         <dd class="lastpost">
                                             <dfn>Last thread</dfn>
-                                            <a href="" title="Welcome" class="lastsubject">Welcome</a>
+                                            <a href="" title="Welcome" class="lastsubject">{{$lastSubject == 'thread' ? $lastSubject->title : 'Re: ' . $lastSubject->title}}</a>
                                             <br />
                                             by
-                                            <a href="" style="color: #AA0000;" class="username-coloured">Goldwin</a>
-                                            24 Feb 2015, 21:50
+                                            <a href="" style="color: @if($lastSubject->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($lastSubject->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$lastSubject->user->nickname}}</a>
+                                            {{$lastSubject->updated_at->format('d M Y, H:i')}}
                                         </dd>
                                     </dl>
                                 </li>
+
                                 @endforeach
 
-
-
-                                <li class="row">
-                                    <dl class="icon forum_read_locked">
-                                        <dt title="Forum locked">
-
-                                            <span class="ico_forum_read_locked"></span>
-
-                                        <div class="list-inner">
-                                            <!-- <a class="feed-icon-forum" title="Feed - General examples" href="http://gramziu.pl/phpBB/feed.php?f=3"><img src="./styles/anami/theme/images/feed.gif" alt="Feed - General examples" /></a> -->
-                                            <a href="" class="forumtitle">The lounge</a>
-                                            <br />Examples of topics, you can see here how everything works.
-                                            <div class="responsive-show" style="display: none;">
-                                                Topics: <strong>6</strong>
-                                            </div>
-                                        </div>
-                                        </dt>
-                                        <dd class="topics">6<dfn>Topics</dfn></dd>
-                                        <dd class="posts">45<dfn>Posts</dfn></dd>
-                                        <dd class="lastpost">
-                                            <dfn>Last post</dfn>
-                                            <a href="" title="Re: Popular topic" class="lastsubject">
-                                                Re: Popular topic
-                                            </a>
-                                            <br />
-                                            by
-                                            <a href="" style="color: #00AA00;" class="username-coloured">Nicholas</a> 07 Dec 2015, 20:03
-                                        </dd>
-                                    </dl>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -154,10 +150,12 @@
                 <div class="grid-3">
                     <h3>Who is online</h3>
                     <p>
-                        In total there are <strong>2</strong> users online :: 1 registered, 0 hidden and 1 guest (based on users active over the past 5 minutes)<br />Most users ever online was <strong>51</strong> on 11 Apr 2017, 10:11
-                        <br /> <br />
+                        In total there are <strong> {{$totalOnline}} </strong> members online (based on members active over the past 5 minutes)
+                        {{--::  registered and 1 guest (based on users active over the past 5 minutes)--}}
+                        {{--<br />Most users ever online was <strong>51</strong> on 11 Apr 2017, 10:11--}}
+                        <br /> <br /> <br /> <br />
                         Registered users:
-                        <a href="" class="username">Grettaeloma</a>
+
                         <br />Legend:
                         <a style="color:#AA0000" href="">Administrators</a>,
                         <a style="color:#00AA00" href="">Global moderators</a>,
@@ -168,7 +166,7 @@
 
                 <div class="grid-3">
                     <h5>About us</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br /><br />Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p>BIFOR was formed as a forum for discussion to the Bina Nusantara University's students to discuss the information being trending at the time, these things can be tasks, important information such as events, and so forth. <br /> <br /> In addition to acting as a means of communication among students, they can also see direct notifications from each department so that the information provided is very accurate and does not cause confusion that often occurs in our beloved university and there is also a feature to view the schedule of each lecture.</p>
                 </div>
                 <div class="grid-3">
                     <h5>You Must Know</h5>
@@ -185,7 +183,18 @@
                 <div class="side-block" style="clear: both;">
                     <h4 class="side-block-head">Birthdays</h4>
                     <div class="side-block-body">
-                        No birthdays today									</div>
+                        @if($todayBirthdays->count() == 0)
+                            No birthdays today
+                        @else
+                            @foreach($todayBirthdays as $user)
+                                @if($user == $todayBirthdays->first())
+                                    <a href="#">{{$user->nickname}}</a>
+                                @else
+                                    , <a href="#">{{$user->nickname}}</a>
+                                @endif
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
 
             </div>
@@ -195,10 +204,10 @@
                 <div class="statistics-list">
                     <h3>Statistics</h3>
                     <div>
-                        <div><span>Total posts <strong>156</strong></span></div>
-                        <div><span>Total topics <strong>26</strong></span></div>
-                        <div><span>Total members <strong>2393</strong></span></div>
-                        <div><span>Our newest member <strong><a href="./memberlist.php?style=5&amp;mode=viewprofile&amp;u=2461" class="username">MichaelEnall</a></strong></span></div>
+                        <div><span>Total topics <strong>{{$totalTopics}}</strong></span></div>
+                        <div><span>Total post <strong>{{$totalPosts}}</strong></span></div>
+                        <div><span>Total members <strong>{{$totalUsers}}</strong></span></div>
+                        <div><span>Our newest member <strong><a href="" class="username">{{$users->last()->nickname}}</a></strong></span></div>
                     </div>
                 </div>
 

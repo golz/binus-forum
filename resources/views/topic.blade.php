@@ -43,8 +43,8 @@
                         @if(Auth::check())
                             @if(Auth::user()->role->name == 'Administrator' || $topic->topicModerators->find(Auth::user()->id) != null)
                             <div class="buttons">
-                                <a href="./posting.php?style=5&amp;mode=post&amp;f=2" class="button font-icon" title="Post a new topic">
-                                    <i class="fa fa-pencil"></i>New Topic					</a>
+                                <a href="{{ url('topic/'.$topic->id.'/threadEditor') }}" class="button font-icon" title="Post a new topic">
+                                    <i class="fa fa-pencil"></i>New Topic</a>
                             </div>
                             @endif
                         @endif
@@ -199,8 +199,8 @@
                         @if(Auth::check())
                             @if(Auth::user()->role->name == 'Administrator' || $topic->topicModerators->find(Auth::user()->id) != null)
                                 <div class="buttons">
-                                    <a href="./posting.php?style=5&amp;mode=post&amp;f=2" class="button font-icon" title="Post a new topic">
-                                        <i class="fa fa-pencil"></i>New Topic					</a>
+                                    <a href="{{ url('topic/'.$topic->id.'/threadEditor') }}" class="button font-icon" title="Post a new topic">
+                                        <i class="fa fa-pencil"></i>New Topic</a>
                                 </div>
                             @endif
                         @endif

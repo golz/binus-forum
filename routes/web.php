@@ -16,7 +16,10 @@ Route::get('topic/{id}', 'TopicController@index');
 Route::get('topic/{topicId}/thread/{id}', 'ThreadController@index');
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('topic/{topicId}/thread/{id}/replyEditor', 'ThreadController@showEditorForm');
+    Route::get('topic/{id}/threadEditor', 'ThreadController@showThreadForm');
+    Route::post('topic/{id}/postThread', 'ThreadController@store');
+
+    Route::get('topic/{topicId}/thread/{id}/replyEditor', 'ThreadController@showReplyForm');
     Route::post('topic/{topicId}/thread/{id}/postReply', 'ThreadController@reply');
 });
 

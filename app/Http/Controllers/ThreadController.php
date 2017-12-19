@@ -42,7 +42,41 @@ class ThreadController extends Controller
         return view('thread', compact('topic', 'thread', 'replies'));
     }
 
+    public function store(Request $request, $id){
+
+        $data = $request->all();
+        $is_announcement = false;
+
+        $validator = Validator::make($data, [
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        if(isset($data['is_announcement']) && $data['is_announcement'] == 'on'){
+            $is_announcement = true;
+        }
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $newThread = Thread::create([
+            'topic_id' => $id,
+            'user_id' => Auth::user()->id,
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'view' => 0,
+            'rating' => 0,
+            'is_announcement' => $is_announcement,
+            'status' => 'open',
+        ]);
+
+        return redirect('topic/'.$id.'#p'.$newThread->id);
+
+    }
+
     public function reply(Request $request, $topicId, $id){
+
         $data = $request->all();
 
         $validator = Validator::make($data, [
@@ -54,7 +88,7 @@ class ThreadController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        Reply::create([
+        $newReply = Reply::create([
             'thread_id' => $id,
             'user_id' => Auth::user()->id,
             'title' => $data['title'],
@@ -62,10 +96,17 @@ class ThreadController extends Controller
         ]);
 
         $lastPage = Reply::where('thread_id', $id)->paginate($this->paginateLimit)->lastPage();
-        return redirect('topic/'.$topicId.'/thread/'.$id.'?page='.$lastPage);
+        return redirect('topic/'.$topicId.'/thread/'.$id.'?page='.$lastPage.'#p'.$newReply->id);
     }
 
-    public function showEditorForm(Request $request, $topicId, $id){
+    public function showThreadForm(Request $request, $id){
+
+        $topic = Topic::find($id);
+
+        return view('editor-thread', compact('topic'));
+    }
+
+    public function showReplyForm(Request $request, $topicId, $id){
 
         $topic = Topic::find($topicId);
         $thread = Thread::find($id);

@@ -69,7 +69,7 @@
                         <div>
                             <a class="sidebar-recent-title" href="{{ url('topic/'.$lastFivePost->topic->id.'/thread/'.$lastFivePost->id) }}">{{$lastFivePost->title}}</a>
                             <span class="sidebar-recent-author">by {{$lastFivePost->user->nickname}}</span>
-                            <span class="sidebar-recent-content">{{trim(substr($lastFivePost->content,0,50))}}...</span>
+                            <span class="sidebar-recent-content">{{trim(substr(strip_tags($lastFivePost->content),0,50))}}...</span>
                         </div>
                         @endforeach
                     </div>

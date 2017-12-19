@@ -55,6 +55,36 @@ class DatabaseSeeder extends Seeder
             'image' => 'default.jpg',
             'password' => bcrypt('asdasd123123')
         ]);
+        User::create([
+            'role_id' => 2,
+            'fullname' => 'Luciana Dian Santami',
+            'nickname' => 'luciana_lim',
+            'nim' => '1901460240',
+            'email' => 'lucianaleminho@gmail.com',
+            'dob' => '1997/04/17',
+            'image' => 'default.jpg',
+            'password' => bcrypt('asdasd123123')
+        ]);
+        User::create([
+            'role_id' => 2,
+            'fullname' => 'Misita Pontiasa',
+            'nickname' => 'misitasasa',
+            'nim' => '1901460240',
+            'email' => 'misita.pontiasa@gmail.com',
+            'dob' => '1996/12/17',
+            'image' => 'default.jpg',
+            'password' => bcrypt('asdasd123123')
+        ]);
+        User::create([
+            'role_id' => 2,
+            'fullname' => 'William',
+            'nickname' => 'Yoda',
+            'nim' => '1801415886',
+            'email' => 'william@binus.edu',
+            'dob' => '1995/12/17',
+            'image' => 'default.jpg',
+            'password' => bcrypt('asdasd123123')
+        ]);
 
 //      Type
         Type::create(['name' => 'General']);
@@ -120,7 +150,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 //      Thread - Usual
-        foreach(range(1, 30) as $index){
+        foreach(range(1, 50) as $index){
             Thread::create([
                 'topic_id' => $faker->numberBetween($min = 1, $max = Topic::all()->count()),
                 'user_id' => $faker->numberBetween($min = 1, $max = User::all()->count()),
@@ -134,7 +164,7 @@ class DatabaseSeeder extends Seeder
         }
 
 //      Reply - Usual
-        foreach(range(1, 60) as $index){
+        foreach(range(1, 150) as $index){
             Reply::create([
                 'thread_id' => $faker->numberBetween($min = 1, $max = Thread::all()->count()),
                 'user_id' => $faker->numberBetween($min = 1, $max = User::all()->count()),

@@ -250,6 +250,7 @@
                             </div>
                         </fieldset>
                         <fieldset class="submit-buttons">
+                            <input type="button" accesskey="f" tabindex="6" name="preview" value="Full Editor &amp; Preview" class="button2" id="qr_full_editor">
                             <input type="submit" accesskey="s" tabindex="7" name="post" value="Submit" class="button1" />
                         </fieldset>
                     </div>

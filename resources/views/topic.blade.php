@@ -130,10 +130,10 @@
                             <ul class="topiclist topics">
                             @foreach($threads as $thread)
                                 <li class="row bg1 global-announce">
-                                    <dl class="icon global_read">
+                                    <dl class="icon ico_topic_read_hot">
                                         <dt title="No unread posts">
 
-                                            <span class="ico_global_read"></span>
+                                            <span class="@if($thread->status == 'close')ico_topic_read_locked @else ico_topic_read_hot @endif"></span>
 
                                         <div class="list-inner">
                                             <a href="{{url('topic/'.$topic->id.'/thread/'.$thread->id)}}" class="topictitle">{{$thread->title}}</a><br />

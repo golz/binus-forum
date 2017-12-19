@@ -6,8 +6,8 @@
                 <ul class="site-footer-nav" role="menubar">
                     <li><a href="{{ url('/') }}" data-navbar-reference="index">Board index</a></li>
                     <li class="icon-delete-cookies"><a href="{{ url('clear-cache') }}">Clear caches</a></li>
-                    <li class="icon-team" data-last-responsive="true"><a href="./memberlist.php?style=5&amp;mode=team" role="menuitem">The team</a></li>
-                    <li class="icon-contact" data-last-responsive="true"><a href="./memberlist.php?style=5&amp;mode=contactadmin" role="menuitem">Contact us</a></li>
+                    <li class="icon-team" data-last-responsive="true"><a href="" role="menuitem">The team</a></li>
+                    <li class="icon-contact" data-last-responsive="true"><a href="" role="menuitem">Contact us</a></li>
                 </ul>
 
                 <ul id="foot-social">

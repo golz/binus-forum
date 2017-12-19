@@ -8,6 +8,7 @@
 
                 <li class="breadcrumbs">
                     <span class="crumb"><a href="{{ route('home') }}">Board index</a></span>
+                    <span class="crumb"><a href="{{ route('register') }}">Register</a></span>
                 </li>
 
                 @include('partials.burger-menu')

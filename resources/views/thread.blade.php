@@ -115,14 +115,14 @@
 
                                 <ul class="posts-buttons">
                                     @if(Auth::check() && $thread->status != 'close')
-                                        @if($thread->user->role->name == 'Administrator' || $topic->topicModerators->find($thread->user->id) != null)
+                                        @if(Auth::user()->role->name == 'Administrator' || $topic->topicModerators->find($thread->user->id) != null)
                                             <li>
-                                                <a href="" title="Close this thread"><i class="fa fa-crosshairs"></i><span>Close this thread</span></a>
+                                                <a href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/close') }}" title="Close this thread"><i class="fa fa-crosshairs"></i><span>Close this thread</span></a>
                                             </li>
                                         @endif
                                         @if($thread->user->id == Auth::user()->id)
                                             <li>
-                                                <a href="" title="Remove this post"><i class="fa fa-remove"></i><span>Delete</span></a>
+                                                <a href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/delete') }}" title="Remove this post"><i class="fa fa-remove"></i><span>Delete</span></a>
                                             </li>
                                             <li>
                                                 <a href="" title="Edit this post"><i class="fa fa-edit"></i><span>Edit this post</span></a>

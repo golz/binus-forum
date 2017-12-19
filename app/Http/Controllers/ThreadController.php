@@ -119,4 +119,21 @@ class ThreadController extends Controller
 
         return view('editor-reply', compact('topic', 'thread', 'replies', 'content'));
     }
+
+    public function destroy($topicId, $id){
+        $thread = Thread::find($id);
+        if($thread->user->id == Auth::user()->id){
+            $thread->delete();
+        }
+
+        return redirect('topic/'.$topicId)->back();
+    }
+
+    public function close($topicId, $id){
+        $thread = Thread::find($id);
+        $thread->status = 'close';
+        $thread->save();
+
+        return redirect()->back();
+    }
 }

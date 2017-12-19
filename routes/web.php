@@ -16,12 +16,23 @@ Route::get('topic/{id}', 'TopicController@index');
 Route::get('topic/{topicId}/thread/{id}', 'ThreadController@index');
 
 Route::group(['middleware' => 'auth'], function(){
+    //Insert Thread
     Route::get('topic/{id}/threadEditor', 'ThreadController@showThreadForm');
     Route::post('topic/{id}/postThread', 'ThreadController@store');
 
+    //Delete Thread
+    Route::get('topic/{topicId}/thread/{id}/delete', 'ThreadController@destroy');
+
+    //Insert Reply
     Route::get('topic/{topicId}/thread/{id}/replyEditor', 'ThreadController@showReplyForm');
     Route::post('topic/{topicId}/thread/{id}/postReply', 'ThreadController@reply');
 });
+
+Route::group(['middleware' => 'admin'], function () {
+    //Close Thread
+    Route::get('topic/{topicId}/thread/{id}/close', 'ThreadController@close');
+});
+
 
 Route::get('/clear-cache', 'UtilityController@clearCache');
 

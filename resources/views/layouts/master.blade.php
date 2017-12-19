@@ -18,11 +18,14 @@
     <link href="{{ asset('css/font.css') }}" rel="stylesheet" type="text/css" media="screen, projection" />
 
     <link href="{{ asset('font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" media="screen, projection" />
+    <link href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}" rel="stylesheet" type="text/css">
 
     <link href="{{ asset('css/stylesheet.css') }}" rel="stylesheet" type="text/css" media="screen, projection" />
     <link href="{{ asset('css/colours.css') }}" rel="stylesheet" type="text/css" media="screen, projection" />
 
-
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('js/core.min.js') }}"></script>
+    <script src="{{ asset('plugins/ckeditor/ckeditor.js')}}"></script>
 
 </head>
 <body id="bifor" class="nojs notouch section-index ltr ">
@@ -34,9 +37,6 @@
         @yield('content')
 
         @include('partials.footer')
-
-        <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-        <script src="{{ asset('js/core.min.js') }}"></script>
 
         <script>
             $(function() {

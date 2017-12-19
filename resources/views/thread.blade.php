@@ -52,7 +52,7 @@
                         </a>
                     @else
                         @if(Auth::check())
-                            <a href="" class="button font-icon" title="Post a reply">
+                            <a href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/replyEditor') }}" class="button font-icon" title="Post a reply">
                                 <i class="fa fa-reply"></i>Post a reply
                             </a>
                         @else
@@ -125,17 +125,14 @@
                                         @endif
                                         @if($thread->user->role->name == 'Administrator' || $topic->topicModerators->find($reply->user->id) != null)
                                             <li>
-                                                <a href="" title="Close this post"><i class="fa fa-close"></i><span>Close this post</span></a>
+                                                <a href="" title="Close this thread"><i class="fa fa-close"></i><span>Close this thread</span></a>
                                             </li>
                                         @endif
                                         <li>
                                             <a href="" title="Report this post"><i class="fa fa-flag"></i><span>Report this post</span></a>
                                         </li>
                                         <li>
-                                            <a href="" title="Reply with quote"><i class="fa fa-quote-left"></i><span>Quote</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="" title="Reply this thread"><i class="fa fa-reply"></i><span>Reply this thread</span></a>
+                                            <a href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/replyEditor') }}" title="Reply this thread"><i class="fa fa-reply"></i><span>Reply this thread</span></a>
                                         </li>
                                     @endif
                                 </ul>
@@ -143,7 +140,7 @@
                                 <p class="author"><a href=""> {{$thread->updated_at->format('d M Y, H:i')}} </a> </p>
 
                                 <div class="content">
-                                    {{$thread->content}}
+                                    {!! $thread->content !!}
                                 </div>
 
                                 <div id="sig{{$thread->id}}" class="signature">
@@ -211,16 +208,17 @@
                                         <li>
                                             <a href="" title="Report this post"><i class="fa fa-flag"></i><span>Report this post</span></a>
                                         </li>
-                                        <li>
-                                            <a href="" title="Reply with quote"><i class="fa fa-quote-left"></i><span>Quote</span></a>
-                                        </li>
+
+                                            <li>
+                                                <a href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/replyEditor?quote='.$reply->id) }}" title="Reply with quote"><i class="fa fa-quote-left"></i><span>Quote</span></a>
+                                            </li>
                                     @endif
                                 </ul>
 
                                 <p class="author"><a href=""> {{$reply->updated_at->format('d M Y, H:i')}} </a> </p>
 
                                 <div class="content">
-                                    {{$reply->content}}
+                                    {!! $reply->content !!}
                                 </div>
 
                                 <div id="sig{{$reply->id}}" class="signature">
@@ -237,20 +235,20 @@
         </div>
         @if(Auth::check() && $thread->status != 'close')
         <div class="chunk">
-            <form method="post" action="" id="qr_postform">
+            <form method="post" action="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/postReply') }}" id="qr_postform">
                 {{ csrf_field() }}
                 <div class="panel">
                     <div class="inner">
                         <fieldset class="fields1">
                             <div class="qr-subject">
-                                <input type="text" name="subject" id="subject" size="45" maxlength="124" tabindex="2" value="Re: Sample" class="inputbox autowidth" placeholder="Subject" />
+                                <input type="text" name="title" id="title" size="45" maxlength="124" tabindex="2" value="Re: {{$thread->title}}" class="inputbox autowidth" placeholder="Title" />
                             </div>
                             <div id="message-box">
-                                <textarea style="height: 9em;" name="message" rows="7" cols="76" tabindex="3" class="inputbox" placeholder="Message"></textarea>
+                                <textarea style="height: 9em;color:#fff;" name="content" rows="7" cols="76" tabindex="3" class="inputbox" placeholder="Content"></textarea>
                             </div>
                         </fieldset>
                         <fieldset class="submit-buttons">
-                            <input type="button" accesskey="f" tabindex="6" name="preview" value="Full Editor &amp; Preview" class="button2" id="qr_full_editor">
+                            <input type="button" accesskey="f" tabindex="6" name="preview" value="Full Editor &amp; Preview" class="button2" id="qr_full_editor" onclick='window.location.href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/replyEditor') }}"'>
                             <input type="submit" accesskey="s" tabindex="7" name="post" value="Submit" class="button1" />
                         </fieldset>
                     </div>
@@ -279,6 +277,35 @@
                     <input type="submit" name="sort" value="Go" class="button2" />
                 </fieldset>
             </form>
+
+            <div class="action-bar bottom">
+
+                <div class="buttons">
+                    @if($thread->status == 'close')
+                        <a href="" class="button font-icon" title="Closed">
+                            <i class="fa fa-close"></i>Closed
+                        </a>
+                    @else
+                        @if(Auth::check())
+                            <a href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/replyEditor') }}" class="button font-icon" title="Post a reply">
+                                <i class="fa fa-reply"></i>Post a reply
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="button font-icon" title="Please login first">
+                                <i class="fa fa-lock"></i>Please login first
+                            </a>
+                        @endif
+                    @endif
+                </div>
+
+                <div class="pagination">
+                    {{$thread->replies->count()}} replies
+                    &bull; Page <strong> {{$replies->currentPage()}} </strong> of <strong> {{$replies->total()}}</strong>
+                    <br>
+                    {!! $replies->appends(Request::except('page'))->render() !!}
+                </div>
+
+            </div>
 
             <p class="jumpbox-return"><a href="{{ url('topic/'.$topic->id) }}" class="left-box arrow-left" accesskey="r">Return to “{{$topic->title}}”</a></p>
 

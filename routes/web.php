@@ -15,6 +15,11 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('topic/{id}', 'TopicController@index');
 Route::get('topic/{topicId}/thread/{id}', 'ThreadController@index');
 
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('topic/{topicId}/thread/{id}/replyEditor', 'ThreadController@showEditorForm');
+    Route::post('topic/{topicId}/thread/{id}/postReply', 'ThreadController@reply');
+});
+
 Route::get('/clear-cache', 'UtilityController@clearCache');
 
 // Login Routes...

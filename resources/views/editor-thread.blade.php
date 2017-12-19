@@ -44,11 +44,21 @@
                         <fieldset class="fields1">
 
                             <dl style="clear: left;">
+                                <div class="error">
+                                    @if($errors->has('title'))
+                                        {{$errors->first('title')}}
+                                    @endif
+                                </div>
                                 <dt><label for="subject">Title:</label></dt>
-                                <dd><input type="text" name="title" id="title" size="45" maxlength="124" tabindex="2" value="" class="inputbox autowidth" placeholder="Title"></dd>
+                                <dd><input type="text" name="title" id="title" size="45" maxlength="124" tabindex="2" value="" class="inputbox autowidth" placeholder="Title" required></dd>
                             </dl>
 
                             <dl style="clear: left;">
+                                <div class="error">
+                                    @if($errors->has('content'))
+                                        {{$errors->first('content')}}
+                                    @endif
+                                </div>
                                 <dt><label for="subject">Content:</label></dt>
                                 <dd style="max-width:900px;">
                                     <textarea id="editor1" rows="10" cols="80" class="textarea" placeholder="Content">

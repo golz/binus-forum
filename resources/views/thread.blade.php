@@ -241,10 +241,10 @@
                     <div class="inner">
                         <fieldset class="fields1">
                             <div class="qr-subject">
-                                <input type="text" name="title" id="title" size="45" maxlength="124" tabindex="2" value="Re: {{$thread->title}}" class="inputbox autowidth" placeholder="Title" />
+                                <input type="text" name="title" id="title" size="45" maxlength="124" tabindex="2" value="Re: {{$thread->title}}" class="inputbox autowidth" placeholder="Title" required/>
                             </div>
                             <div id="message-box">
-                                <textarea style="height: 9em;color:#fff;" name="content" rows="7" cols="76" tabindex="3" class="inputbox" placeholder="Content"></textarea>
+                                <textarea style="height: 9em;color:#fff;" name="content" rows="7" cols="76" tabindex="3" class="inputbox" placeholder="Content" required></textarea>
                             </div>
                         </fieldset>
                         <fieldset class="submit-buttons">

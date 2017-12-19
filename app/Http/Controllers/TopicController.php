@@ -14,7 +14,6 @@ class TopicController extends Controller
         //$threads = $topic->threads->where('is_announcement', false);
         $threads = Thread::where('topic_id', $id)->where('is_announcement', false);
 
-
         if(isset($request['sk']) && isset($request['sd'])){ //Sort Value
             $sortByValue = $request['sk'];
             $orderByValue = $request['sd'];

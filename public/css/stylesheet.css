@@ -126,7 +126,7 @@ ul ul ul {
 .side-block-body input {
   font-size: 1em;
 }
-.side-login #username,
+.side-login #email,
 .side-login #password,
 .side-login #remember-me {
   display: block;

@@ -34,7 +34,7 @@
                         <h4 class="side-block-head"><a href="{{ route('login') }}">Login</a>&nbsp; &bull; &nbsp;<a href="{{ route('register') }}">Register</a></h4>
                         <div class="side-block-body">
                             <fieldset>
-                                <input type="text" tabindex="1" name="email" id="email" size="10" class="inputbox" title="Email" placeholder="Email" />
+                                <input type="text" tabindex="1" name="email" id="email" size="15" class="inputbox" title="Email" placeholder="Email" />
                                 <div class="error">
                                     @if($errors->has('email'))
                                         {{$errors->first('email')}}
@@ -234,7 +234,7 @@
                     <h3>Statistics</h3>
                     <div>
                         <div><span>Total topics <strong>{{$totalTopics}}</strong></span></div>
-                        <div><span>Total post <strong>{{$totalPosts}}</strong></span></div>
+                        <div><span>Total posts <strong>{{$totalPosts}}</strong></span></div>
                         <div><span>Total members <strong>{{$totalUsers}}</strong></span></div>
                         <div><span>Our newest member <strong><a href="" class="username">{{$users->last()->nickname}}</a></strong></span></div>
                     </div>

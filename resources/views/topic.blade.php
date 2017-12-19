@@ -159,7 +159,7 @@
                                             <span class="lastpostavatar">
                                                 <img class="avatar" src="{{ asset('uploads/profile/'.$thread->replies->last()->user->image) }}" width="30" height="30" alt="User avatar" />
                                             </span>
-                                            <a href="" title="Go to last post" class="lastpost-last"><i class="fa fa-arrow-right"></i></a>
+                                            <a href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'?page='.\App\Reply::where('thread_id',$thread->id)->paginate(10)->lastPage().'#p'.$thread->replies->last()->id) }}" title="Go to last post" class="lastpost-last"><i class="fa fa-arrow-right"></i></a>
                                             <br />
                                             {{$thread->replies->last()->updated_at->format('d M Y, H:i')}}
                                         </span>

@@ -12,7 +12,7 @@ class TopicController extends Controller
         $topic = Topic::find($id);
         $announcements = $topic->threads->where('is_announcement', true);
         //$threads = $topic->threads->where('is_announcement', false);
-        $threads = Thread::where('topic_id', $id)->where('is_announcement', false);
+        $threads = Thread::where('topic_id', $id)->where('is_announcement', false)->orderBy('created_at', 'desc');
 
         if(isset($request['sk']) && isset($request['sd'])){ //Sort Value
             $sortByValue = $request['sk'];

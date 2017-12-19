@@ -144,7 +144,7 @@
                                             <a href="   @if($lastType == 'thread')
                                                             {{url('topic/'.$lastSubject->topic->id.'/thread/'.$lastSubject->id)}}
                                                         @else
-                                                            {{url('topic/'.$lastSubject->thread->topic->id.'/thread/'.$lastSubject->thread->id.'?page='.\App\Reply::where('thread_id',$lastSubject->thread->id)->paginate(10)->lastPage())}}
+                                                            {{url('topic/'.$lastSubject->thread->topic->id.'/thread/'.$lastSubject->thread->id.'?page='.\App\Reply::where('thread_id',$lastSubject->thread->id)->paginate(10)->lastPage().'#p'.$lastSubject->id)}}
                                                         @endif
                                                 "
                                                title="@if($lastType == 'thread') {{$lastSubject->title}} @else {{$lastSubject->thread->title}} @endif"

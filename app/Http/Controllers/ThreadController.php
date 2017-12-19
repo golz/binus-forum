@@ -17,7 +17,7 @@ class ThreadController extends Controller
 
         $topic = Topic::find($topicId);
         $thread = Thread::find($id);
-        $replies = Reply::where('thread_id', $id);
+        $replies = Reply::where('thread_id', $id)->orderBy('created_at', 'asc');
 
         if(isset($request['sk']) && isset($request['sd'])){ //Sort Value
             $sortByValue = $request['sk'];

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class ThreadController extends Controller
 {
-    public $paginateLimit = 5;
+    public $paginateLimit = 10;
 
     public function index(Request $request, $topicId, $id){
 

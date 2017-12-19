@@ -164,7 +164,7 @@ class DatabaseSeeder extends Seeder
         }
 
 //      Reply - Usual
-        foreach(range(1, 150) as $index){
+        foreach(range(1, 300) as $index){
             Reply::create([
                 'thread_id' => $faker->numberBetween($min = 1, $max = Thread::all()->count()),
                 'user_id' => $faker->numberBetween($min = 1, $max = User::all()->count()),

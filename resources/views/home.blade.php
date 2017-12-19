@@ -113,11 +113,20 @@
                                         </dt>
                                         <dd class="topics">{{$topic->threads->count()}}<dfn>Threads</dfn></dd>
                                         <?php
+                                            $lastSubject = null;
                                             $postCount = 0;
                                             foreach($topic->threads as $thread){
                                                 $postCount += 1;
-                                                $lastType = 'thread';
-                                                $lastSubject = $topic->threads->last();
+
+                                                if($lastSubject == null){
+                                                    $lastSubject = $topic->threads->last();
+                                                    $lastType = 'thread';
+                                                }
+                                                else if($topic->threads->last()->updated_at > $lastSubject->updated_at){
+                                                    $lastSubject = $topic->threads->last();
+                                                    $lastType = 'thread';
+                                                }
+
                                                 foreach($thread->replies as $reply){
                                                     $postCount +=1;
                                                     if($reply->updated_at > $lastSubject->updated_at){
@@ -135,12 +144,20 @@
                                             <a href="   @if($lastType == 'thread')
                                                             {{url('topic/'.$lastSubject->topic->id.'/thread/'.$lastSubject->id)}}
                                                         @else
-                                                            {{url('topic/'.$lastSubject->thread->topic->id.'/thread/'.$lastSubject->thread->id)}}
+                                                            {{url('topic/'.$lastSubject->thread->topic->id.'/thread/'.$lastSubject->thread->id.'?page='.\App\Reply::where('thread_id',$lastSubject->thread->id)->paginate(10)->lastPage())}}
                                                         @endif
                                                 "
                                                title="@if($lastType == 'thread') {{$lastSubject->title}} @else {{$lastSubject->thread->title}} @endif"
                                                class="lastsubject">
-                                                {{$lastType == 'thread' ? $lastSubject->title : 'Re: ' . $lastSubject->title}}
+                                                @if($lastType == 'thread')
+                                                    {{$lastSubject->title}}
+                                                @else
+                                                    @if(strpos($lastSubject->title, 'Re:') != 0)
+                                                        Re: {{$lastSubject->title}}
+                                                    @else
+                                                        {{$lastSubject->title}}
+                                                    @endif
+                                                @endif
                                             </a>
                                             <br />
                                             by

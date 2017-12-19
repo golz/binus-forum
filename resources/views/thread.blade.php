@@ -85,7 +85,7 @@
                             </dt>
 
                             <dd class="profile-rank">
-                                @if($thread->user->role->name = 'Administrator')
+                                @if($thread->user->role->name == 'Administrator')
                                     Administrator
                                 @elseif($topic->topicModerators->find($thread->user->id))
                                     Moderator
@@ -115,17 +115,17 @@
 
                                 <ul class="posts-buttons">
                                     @if(Auth::check() && $thread->status != 'close')
+                                        @if($thread->user->role->name == 'Administrator' || $topic->topicModerators->find($thread->user->id) != null)
+                                            <li>
+                                                <a href="" title="Close this thread"><i class="fa fa-crosshairs"></i><span>Close this thread</span></a>
+                                            </li>
+                                        @endif
                                         @if($thread->user->id == Auth::user()->id)
                                             <li>
                                                 <a href="" title="Remove this post"><i class="fa fa-remove"></i><span>Delete</span></a>
                                             </li>
                                             <li>
                                                 <a href="" title="Edit this post"><i class="fa fa-edit"></i><span>Edit this post</span></a>
-                                            </li>
-                                        @endif
-                                        @if($thread->user->role->name == 'Administrator' || $topic->topicModerators->find($reply->user->id) != null)
-                                            <li>
-                                                <a href="" title="Close this thread"><i class="fa fa-close"></i><span>Close this thread</span></a>
                                             </li>
                                         @endif
                                         <li>

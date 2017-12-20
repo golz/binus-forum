@@ -1,0 +1,3 @@
+1. Search thread by user nickname and keyword (thread title and description, reply title and description)
+2. Private message between user
+3. Realtime chat (box)

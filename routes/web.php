@@ -20,17 +20,30 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('topic/{id}/threadEditor', 'ThreadController@showThreadForm');
     Route::post('topic/{id}/postThread', 'ThreadController@store');
 
+    //Update Thread
+    Route::get('topic/{topicId}/thread/{id}/edit', 'ThreadController@showEditThreadForm');
+    Route::post('topic/{topicId}/thread/{id}/edit','ThreadController@edit');
+
     //Delete Thread
     Route::get('topic/{topicId}/thread/{id}/delete', 'ThreadController@destroy');
+
+    //Close Thread
+    Route::get('topic/{topicId}/thread/{id}/close', 'ThreadController@close');
 
     //Insert Reply
     Route::get('topic/{topicId}/thread/{id}/replyEditor', 'ThreadController@showReplyForm');
     Route::post('topic/{topicId}/thread/{id}/postReply', 'ThreadController@reply');
+
+    //Update Reply
+    Route::get('topic/{topicId}/thread/{threadId}/reply/{id}/edit', 'ThreadController@showEditReplyForm');
+    Route::post('topic/{topicId}/thread/{threadId}/reply/{id}/edit', 'ThreadController@editReply');
+
+    //Delete Reply
+    Route::get('topic/{topicId}/thread/{threadId}/reply/{id}/delete', 'ThreadController@destroyReply');
 });
 
 Route::group(['middleware' => 'admin'], function () {
-    //Close Thread
-    Route::get('topic/{topicId}/thread/{id}/close', 'ThreadController@close');
+
 });
 
 

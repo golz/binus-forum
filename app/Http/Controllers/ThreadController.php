@@ -13,6 +13,9 @@ class ThreadController extends Controller
 {
     public $paginateLimit = 10;
 
+    /**
+     * Thread
+     */
     public function index(Request $request, $topicId, $id){
 
         $topic = Topic::find($topicId);
@@ -72,9 +75,71 @@ class ThreadController extends Controller
         ]);
 
         return redirect('topic/'.$id.'#p'.$newThread->id);
-
     }
 
+    public function edit(Request $request, $topicId, $id){
+        $data = $request->all();
+        $is_announcement = false;
+
+        $validator = Validator::make($data, [
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        if(isset($data['is_announcement']) && $data['is_announcement'] == 'on'){
+            $is_announcement = true;
+        }
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $updatedThread = Thread::find($id);
+        $updatedThread->title = $data['title'];
+        $updatedThread->content = $data['content'];
+        $updatedThread->is_announcement = $is_announcement;
+        $updatedThread->save();
+
+        return redirect('topic/'.$topicId.'/thread/'.$id.'#p'.$id);
+    }
+
+    public function destroy($topicId, $id){
+        $thread = Thread::find($id);
+        if($thread->user->id == Auth::user()->id){
+            $thread->delete();
+        }
+
+        return redirect('topic/'.$topicId);
+    }
+
+    public function close($topicId, $id){
+        if(Auth::check() && (Auth::user()->role->id == 1 || Topic::find($topicId)->topicModerators->find(Auth::user()->id) != null)) {
+            $thread = Thread::find($id);
+            $thread->status = 'close';
+            $thread->save();
+        }
+
+        return redirect()->back();
+    }
+
+    public function showThreadForm(Request $request, $id){
+
+        $topic = Topic::find($id);
+
+        return view('editor-thread', compact('topic'));
+    }
+
+    public function showEditThreadForm(Request $request, $topicId, $id){
+
+        $topic = Topic::find($topicId);
+        $thread = Thread::find($id);
+
+        return view('editor-thread-update', compact('topic','thread'));
+    }
+
+    /**
+     * Reply
+     */
     public function reply(Request $request, $topicId, $id){
 
         $data = $request->all();
@@ -99,11 +164,36 @@ class ThreadController extends Controller
         return redirect('topic/'.$topicId.'/thread/'.$id.'?page='.$lastPage.'#p'.$newReply->id);
     }
 
-    public function showThreadForm(Request $request, $id){
+    public function editReply(Request $request, $topicId, $threadId, $id){
 
-        $topic = Topic::find($id);
+        $data = $request->all();
 
-        return view('editor-thread', compact('topic'));
+        $validator = Validator::make($data, [
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $updatedReply = Reply::find($id);
+        $updatedReply->title = $data['title'];
+        $updatedReply->content = $data['content'];
+        $updatedReply->save();
+
+        $lastPage = Reply::where('thread_id', $threadId)->paginate($this->paginateLimit)->lastPage();
+        return redirect('topic/'.$topicId.'/thread/'.$threadId.'?page='.$lastPage.'#p'.$updatedReply->id);
+    }
+
+    public function destroyReply($topicId, $threadId, $id){
+
+        $reply = Reply::find($id);
+        if($reply->user->id == Auth::user()->id){
+            $reply->delete();
+        }
+
+        return redirect()->back();
     }
 
     public function showReplyForm(Request $request, $topicId, $id){
@@ -120,20 +210,12 @@ class ThreadController extends Controller
         return view('editor-reply', compact('topic', 'thread', 'replies', 'content'));
     }
 
-    public function destroy($topicId, $id){
-        $thread = Thread::find($id);
-        if($thread->user->id == Auth::user()->id){
-            $thread->delete();
-        }
+    public function showEditReplyForm(Request $request, $topicId, $threadId, $id){
 
-        return redirect('topic/'.$topicId)->back();
-    }
+        $topic = Topic::find($topicId);
+        $thread = Thread::find($threadId);
+        $reply = Reply::find($id);
 
-    public function close($topicId, $id){
-        $thread = Thread::find($id);
-        $thread->status = 'close';
-        $thread->save();
-
-        return redirect()->back();
+        return view('editor-reply-update', compact('topic', 'thread', 'reply'));
     }
 }

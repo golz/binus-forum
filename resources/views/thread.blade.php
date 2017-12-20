@@ -125,7 +125,7 @@
                                                 <a href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/delete') }}" title="Remove this post"><i class="fa fa-remove"></i><span>Delete</span></a>
                                             </li>
                                             <li>
-                                                <a href="" title="Edit this post"><i class="fa fa-edit"></i><span>Edit this post</span></a>
+                                                <a href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/edit') }}" title="Edit this post"><i class="fa fa-edit"></i><span>Edit this post</span></a>
                                             </li>
                                         @endif
                                         <li>
@@ -199,10 +199,10 @@
                                     @if(Auth::check() && $thread->status != 'close')
                                         @if($reply->user->id == Auth::user()->id)
                                         <li>
-                                            <a href="" title="Remove this post"><i class="fa fa-remove"></i><span>Delete</span></a>
+                                            <a href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/reply/'.$reply->id.'/delete') }}" title="Remove this post"><i class="fa fa-remove"></i><span>Delete</span></a>
                                         </li>
                                         <li>
-                                            <a href="" title="Edit this post"><i class="fa fa-edit"></i><span>Edit this post</span></a>
+                                            <a href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/reply/'.$reply->id.'/edit') }}" title="Edit this post"><i class="fa fa-edit"></i><span>Edit this post</span></a>
                                         </li>
                                         @endif
                                         <li>

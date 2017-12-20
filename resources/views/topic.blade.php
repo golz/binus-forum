@@ -136,7 +136,11 @@
                                             <span class="@if($thread->status == 'close')ico_topic_read_locked @else ico_topic_read_hot @endif"></span>
 
                                         <div class="list-inner">
-                                            <a href="{{url('topic/'.$topic->id.'/thread/'.$thread->id)}}" class="topictitle">{{$thread->title}}</a><br />
+                                            <a href="{{url('topic/'.$topic->id.'/thread/'.$thread->id)}}" class="topictitle">{{$thread->title}}</a>
+                                            @if($thread->replies->where('created_at', '>=', \Carbon\Carbon::today())->count() > 3)
+                                            <img src="{{ asset('images/hot-thread.png') }}" alt="" width="auto" height="18" title="Hot Thread">
+                                            @endif
+                                            <br />
                                             <span class="topic-ap"><i class="fa fa-floppy-o"></i></span>
                                             by
                                             <a href="{{ url('user/profile/'.$thread->user->id) }}" style="color: @if($thread->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($thread->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$thread->user->nickname}}</a> &raquo;

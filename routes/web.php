@@ -40,6 +40,23 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'user'], function(){
         //View Profile
         Route::get('profile/{id}', 'ProfileController@index');
+
+        //Control Panel
+        Route::group(['prefix' => 'cpanel'],function(){
+            //Profile
+            Route::get('profile', 'ProfileController@profile');
+            Route::post('profile', 'ProfileController@editProfile');
+            //Signature
+            Route::get('signature', 'ProfileController@signature');
+            Route::post('signature', 'ProfileController@editSignature');
+            //Avatar
+            Route::get('avatar', 'ProfileController@avatar');
+            Route::post('avatar', 'ProfileController@editAvatar');
+            //Account Setting
+            Route::get('accountSetting', 'ProfileController@accountSetting');
+            Route::post('accountSetting', 'ProfileController@editAccountSetting');
+        });
+
     });
 });
 

@@ -25,16 +25,6 @@
                 <h2 class="topic-title">Viewing profile - {{$user->nickname}}</h2>
             </div>
 
-            <div class="search-box">
-                <form method="get" id="topic-search" action="">
-                    {{ csrf_field() }}
-                    <fieldset>
-                        <input class="inputbox search"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
-                        <button class="button" type="submit" title="Search"><i class="fa fa-search"></i></button>
-                    </fieldset>
-                </form>
-            </div>
-
         </div>
     </div>
 
@@ -58,6 +48,7 @@
                         </dl>
 
                         <dl class="left-box details profile-details">
+
                             <dt>NIM:</dt>
                             <dd>
                                 <span style="font-weight: bold;">{{$user->nim}}</span>
@@ -69,6 +60,10 @@
                             <dt>Nickname:</dt>
                             <dd>
                                 <span style="color: @if($user->role->name == 'Administrator') #AA0000 @elseif($isModerator == true) #00AA00 @endif ; font-weight: bold;">{{$user->nickname}}</span>
+                            </dd>
+                            <dt>&nbsp;</dt>
+                            <dd>
+                                <span><a href="{{ url('user/cpanel/profile/'.Auth::user()->id) }}">[edit profile]</a></span>
                             </dd>
                         </dl>
 

@@ -57,7 +57,7 @@ class RegisterController extends Controller
             'bday_month' => 'required|numeric|min:1',
             'bday_year' => 'required|numeric|min:1',
             'image' => 'image',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6|max:100|confirmed',
         ]);
     }
 
@@ -72,11 +72,11 @@ class RegisterController extends Controller
         $file_name = 'default.jpg';
         if(Input::hasFile('image')) {
             if (Input::file('image')->isValid()) {
-                $destinationPath = public_path('uploads/profile');
+                $destination_path = public_path('uploads/profile');
                 $extension = Input::file('image')->getClientOriginalExtension();
-                $fileName = uniqid() . '.' . $extension;
+                $file_name = uniqid() . '.' . $extension;
 
-                Input::file('image')->move($destinationPath, $fileName);
+                Input::file('image')->move($destination_path, $file_name);
             }
         }
         $dob = $data['bday_year'] . '/' . $data['bday_month'] . '/' . $data['bday_day'];

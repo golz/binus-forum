@@ -29,7 +29,7 @@
                             <div class="pointer"><div class="pointer-inner"></div></div>
                             <ul class="dropdown-contents dropdown-nonscroll" role="menu">
                                 <li class="font-icon icon-profile">
-                                    <a href="" title="User Control Panel" role="menuitem">
+                                    <a href="{{ url('user/cpanel/profile/') }}" title="User Control Panel" role="menuitem">
                                         <i class="fa fa-wrench"></i>
                                         User Control Panel
                                     </a>

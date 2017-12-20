@@ -144,7 +144,9 @@
                                 </div>
 
                                 <div id="sig{{$thread->id}}" class="signature">
-                                    {{--signature here--}}
+                                    @if($thread->user->signature != null)
+                                        {{$thread->user->signature->content}}
+                                    @endif
                                 </div>
                             </div>
 
@@ -222,7 +224,9 @@
                                 </div>
 
                                 <div id="sig{{$reply->id}}" class="signature">
-                                    {{--signature here--}}
+                                    @if($reply->user->signature != null)
+                                        {{$reply->user->signature->content}}
+                                    @endif
                                 </div>
                             </div>
 

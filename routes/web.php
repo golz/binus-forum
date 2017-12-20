@@ -16,30 +16,31 @@ Route::get('topic/{id}', 'TopicController@index');
 Route::get('topic/{topicId}/thread/{id}', 'ThreadController@index');
 
 Route::group(['middleware' => 'auth'], function(){
-    //Insert Thread
-    Route::get('topic/{id}/threadEditor', 'ThreadController@showThreadForm');
-    Route::post('topic/{id}/postThread', 'ThreadController@store');
+    Route::group(['prefix' => 'topic'], function(){
+        //Insert Thread
+        Route::get('{id}/threadEditor', 'ThreadController@showThreadForm');
+        Route::post('{id}/postThread', 'ThreadController@store');
+        //Update Thread
+        Route::get('{topicId}/thread/{id}/edit', 'ThreadController@showEditThreadForm');
+        Route::post('{topicId}/thread/{id}/edit','ThreadController@edit');
+        //Delete Thread
+        Route::get('{topicId}/thread/{id}/delete', 'ThreadController@destroy');
+        //Close Thread
+        Route::get('{topicId}/thread/{id}/close', 'ThreadController@close');
 
-    //Update Thread
-    Route::get('topic/{topicId}/thread/{id}/edit', 'ThreadController@showEditThreadForm');
-    Route::post('topic/{topicId}/thread/{id}/edit','ThreadController@edit');
-
-    //Delete Thread
-    Route::get('topic/{topicId}/thread/{id}/delete', 'ThreadController@destroy');
-
-    //Close Thread
-    Route::get('topic/{topicId}/thread/{id}/close', 'ThreadController@close');
-
-    //Insert Reply
-    Route::get('topic/{topicId}/thread/{id}/replyEditor', 'ThreadController@showReplyForm');
-    Route::post('topic/{topicId}/thread/{id}/postReply', 'ThreadController@reply');
-
-    //Update Reply
-    Route::get('topic/{topicId}/thread/{threadId}/reply/{id}/edit', 'ThreadController@showEditReplyForm');
-    Route::post('topic/{topicId}/thread/{threadId}/reply/{id}/edit', 'ThreadController@editReply');
-
-    //Delete Reply
-    Route::get('topic/{topicId}/thread/{threadId}/reply/{id}/delete', 'ThreadController@destroyReply');
+        //Insert Reply
+        Route::get('{topicId}/thread/{id}/replyEditor', 'ThreadController@showReplyForm');
+        Route::post('{topicId}/thread/{id}/postReply', 'ThreadController@reply');
+        //Update Reply
+        Route::get('{topicId}/thread/{threadId}/reply/{id}/edit', 'ThreadController@showEditReplyForm');
+        Route::post('{topicId}/thread/{threadId}/reply/{id}/edit', 'ThreadController@editReply');
+        //Delete Reply
+        Route::get('{topicId}/thread/{threadId}/reply/{id}/delete', 'ThreadController@destroyReply');
+    });
+    Route::group(['prefix' => 'user'], function(){
+        //View Profile
+        Route::get('profile/{id}', 'ProfileController@index');
+    });
 });
 
 Route::group(['middleware' => 'admin'], function () {

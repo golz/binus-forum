@@ -8,6 +8,7 @@ use App\Type;
 use App\Topic;
 use App\Thread;
 use App\Reply;
+use App\Signature;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
 //      User
         User::create([
             'role_id' => 1,
+            'signature_id' => 1,
             'fullname' => 'Goldwin Japar',
             'nickname' => 'golz',
             'nim' => '1901472631',
@@ -84,6 +86,11 @@ class DatabaseSeeder extends Seeder
             'dob' => '1995/12/17',
             'image' => 'default.jpg',
             'password' => bcrypt('asdasd123123')
+        ]);
+
+//      Signature
+        Signature::create([
+            'content' => 'Hello, I\'m administrator here :D'
         ]);
 
 //      Type
@@ -155,7 +162,7 @@ class DatabaseSeeder extends Seeder
                 'topic_id' => $faker->numberBetween($min = 1, $max = Topic::all()->count()),
                 'user_id' => $faker->numberBetween($min = 1, $max = User::all()->count()),
                 'title' => $faker->text($maxNbChars = 20),
-                'content' => $faker->realText(),
+                'content' => $faker->realText() . $faker->realText(),
                 'view' => $faker->numberBetween($min = 0, $max = 10),
                 'rating' => $faker->numberBetween($min = 0, $max = 5),
                 'is_announcement' => false,

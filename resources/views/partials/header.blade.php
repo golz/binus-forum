@@ -23,15 +23,36 @@
                         </a>
                     </li>
                 @else
-                    <li class="font-icon rightside"  data-skip-responsive="true">
-                        <a href="{{ route('logout') }}" title="Logout" accesskey="x" role="menuitem" onclick="event.preventDefault();
+                    <li class="font-icon dropdown-container" data-skip-responsive="true">
+                        <a href="./search.php?style=5" class="dropdown-trigger"><i class="fa fa-user"></i></a>
+                        <div class="dropdown hidden">
+                            <div class="pointer"><div class="pointer-inner"></div></div>
+                            <ul class="dropdown-contents dropdown-nonscroll" role="menu">
+                                <li class="font-icon icon-profile">
+                                    <a href="" title="User Control Panel" role="menuitem">
+                                        <i class="fa fa-wrench"></i>
+                                        User Control Panel
+                                    </a>
+                                </li>
+                                <li class="font-icon icon-profile">
+                                    <a href="{{ url('user/profile/'.Auth::user()->id) }}" title="Profile" role="menuitem">
+                                        <i class="fa fa-user"></i>
+                                        Profile
+                                    </a>
+                                </li>
+                                <li class="separator"></li>
+                                <li class="font-icon icon-logout">
+                                    <a href="{{ route('logout') }}" title="Logout" accesskey="x" role="menuitem" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>
 
-                            <span class="nav-rh-2">Logout</span>
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
+                                        <span class="nav-rh-2">Logout</span>
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 @endguest
 

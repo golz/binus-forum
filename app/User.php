@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'role_id', 'fullname', 'nickname', 'nim', 'email', 'dob', 'image', 'password'
+        'role_id', 'signature_id', 'fullname', 'nickname', 'nim', 'email', 'dob', 'image', 'password'
     ];
 
     /**
@@ -46,5 +46,9 @@ class User extends Authenticatable
 
     public function topicModerators(){
         return $this->hasMany('App\TopicModerator');
+    }
+
+    public function signature(){
+        return $this->belongsTo('App\Signature');
     }
 }

@@ -83,7 +83,7 @@
                                                 <a href="{{url('topic/'.$topic->id.'/thread/'.$announcement->id)}}" class="topictitle">{{$announcement->title}}</a><br />
                                                 <span class="topic-ap"><i class="fa fa-floppy-o"></i></span>
                                                 by
-                                                <a href="" style="color: @if($announcement->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($announcement->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$announcement->user->nickname}}</a> &raquo;
+                                                <a href="{{ url('user/profile/'.$announcement->user->id) }}" style="color: @if($announcement->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($announcement->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$announcement->user->nickname}}</a> &raquo;
                                                 {{$announcement->updated_at->format('d M Y, H:i')}}
                                                 <div class="r-lastpost-container">
                                                     <a href="" title="Go to last post" class="r-lastpost"><i class="fa fa-angle-right"></i></a>
@@ -99,7 +99,7 @@
                                                 <span>
                                                     <dfn>Last post </dfn>
                                                     Last post by
-                                                    <a href="" style="color: @if($announcement->replies->last()->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($announcement->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$announcement->replies->last()->user->nickname}}</a>
+                                                    <a href="{{ url('user/profile/'.$announcement->replies->last()->user->id) }}" style="color: @if($announcement->replies->last()->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($announcement->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$announcement->replies->last()->user->nickname}}</a>
                                                     <span class="lastpostavatar">
                                                         <img class="avatar" src="{{ asset('uploads/profile/'.$announcement->replies->last()->user->image) }}" width="30" height="30" alt="User avatar" />
                                                     </span>
@@ -139,7 +139,7 @@
                                             <a href="{{url('topic/'.$topic->id.'/thread/'.$thread->id)}}" class="topictitle">{{$thread->title}}</a><br />
                                             <span class="topic-ap"><i class="fa fa-floppy-o"></i></span>
                                             by
-                                            <a href="" style="color: @if($thread->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($thread->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$thread->user->nickname}}</a> &raquo;
+                                            <a href="{{ url('user/profile/'.$thread->user->id) }}" style="color: @if($thread->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($thread->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$thread->user->nickname}}</a> &raquo;
                                             {{$thread->updated_at->format('d M Y, H:i')}}
                                             <div class="r-lastpost-container">
                                                 <a href="" title="Go to last post" class="r-lastpost"><i class="fa fa-angle-right"></i></a>
@@ -155,7 +155,7 @@
                                         <span>
                                             <dfn>Last post </dfn>
                                             Last post by
-                                            <a href="" style="color: @if($thread->replies->last()->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($thread->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$thread->replies->last()->user->nickname}}</a>
+                                            <a href="{{ url('user/profile/'.$thread->replies->last()->user->id) }}" style="color: @if($thread->replies->last()->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($thread->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$thread->replies->last()->user->nickname}}</a>
                                             <span class="lastpostavatar">
                                                 <img class="avatar" src="{{ asset('uploads/profile/'.$thread->replies->last()->user->image) }}" width="30" height="30" alt="User avatar" />
                                             </span>

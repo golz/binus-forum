@@ -79,7 +79,7 @@
                             <dt class="has-profile-rank has-avatar">
                             <div class="avatar-container">
                                 <a href="" class="avatar"><img class="avatar" src="{{ asset('uploads/profile/'.$thread->user->image) }}" width="80" height="80" alt="User avatar" /></a>																				</div>
-                            <a href="" style="color: @if($thread->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($thread->user->id) != null) #00AA00 @endif ;" class="username-coloured">
+                            <a href="{{ url('user/profile/'.$thread->user->id) }}" style="color: @if($thread->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($thread->user->id) != null) #00AA00 @endif ;" class="username-coloured">
                                 {{$thread->user->nickname}}
                             </a>
                             </dt>
@@ -163,7 +163,7 @@
                             <dt class="has-profile-rank has-avatar">
                             <div class="avatar-container">
                                 <a href="" class="avatar"><img class="avatar" src="{{ asset('uploads/profile/'.$reply->user->image) }}" width="80" height="80" alt="User avatar" /></a>																				</div>
-                            <a href="" style="color: @if($reply->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($reply->user->id) != null) #00AA00 @endif ;" class="username-coloured">
+                            <a href="{{ url('user/profile/'.$reply->user->id) }}" style="color: @if($reply->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($reply->user->id) != null) #00AA00 @endif ;" class="username-coloured">
                                 {{$reply->user->nickname}}
                             </a>
                             </dt>

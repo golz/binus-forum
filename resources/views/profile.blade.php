@@ -88,7 +88,7 @@
                         <div class="column2">
                             <h3>User statistics</h3>
                             <dl class="details">
-                                <dt>Joined:</dt> <dd>{{$user->created_at}}</dd>
+                                <dt>Joined:</dt> <dd>{{$user->created_at->format('d M Y, H:i')}}</dd>
                                 <dt>Total posts:</dt>
                                 <dd>{{$totalPost}} | <strong><a href="">Search user’s posts</a></strong>
                                     <br>({{$postPercentage}} posts per day)

@@ -161,7 +161,7 @@
                                             </a>
                                             <br />
                                             by
-                                            <a href="" style="color: @if($lastSubject->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($lastSubject->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$lastSubject->user->nickname}}</a>
+                                            <a href="{{ url('user/profile/'.$lastSubject->user->id) }}" style="color: @if($lastSubject->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($lastSubject->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$lastSubject->user->nickname}}</a>
                                             {{$lastSubject->updated_at->format('d M Y, H:i')}}
                                         </dd>
                                     </dl>
@@ -253,7 +253,7 @@
                         <div><span>Total topics <strong>{{$totalTopics}}</strong></span></div>
                         <div><span>Total posts <strong>{{$totalPosts}}</strong></span></div>
                         <div><span>Total members <strong>{{$totalUsers}}</strong></span></div>
-                        <div><span>Our newest member <strong><a href="" class="username">{{$users->last()->nickname}}</a></strong></span></div>
+                        <div><span>Our newest member <strong><a href="{{ url('user/profile/'.$users->last()->id) }}" class="username">{{$users->last()->nickname}}</a></strong></span></div>
                     </div>
                 </div>
 

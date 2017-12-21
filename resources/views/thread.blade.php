@@ -27,15 +27,7 @@
                 <h2 class="topic-title">{{$thread->title}}</h2>
             </div>
 
-            <div class="search-box">
-                <form method="get" id="topic-search" action="">
-                    {{ csrf_field() }}
-                    <fieldset>
-                        <input class="inputbox search"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
-                        <button class="button" type="submit" title="Search"><i class="fa fa-search"></i></button>
-                    </fieldset>
-                </form>
-            </div>
+            @include('partials.search-tool', ['topic_id' => $topic->id])
 
         </div>
     </div>

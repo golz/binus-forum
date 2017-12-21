@@ -15,8 +15,31 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('topic/{id}', 'TopicController@index');
 Route::get('topic/{topicId}/thread/{id}', 'ThreadController@index');
 
+Route::group(['middleware' => 'guest'], function(){
+    // Login Routes...
+    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'Auth\LoginController@login');
+
+    // Registration Routes...
+    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('register', 'Auth\RegisterController@register');
+
+    // Password Reset Routes...
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+});
+
 Route::group(['middleware' => 'auth'], function(){
+    // Logout Routes...
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
     Route::group(['prefix' => 'topic'], function(){
+        //Searach Thread and Reply
+        Route::get('{id}/search', 'SearchController@searchAll');
+
         //Insert Thread
         Route::get('{id}/threadEditor', 'ThreadController@showThreadForm');
         Route::post('{id}/postThread', 'ThreadController@store');
@@ -41,6 +64,9 @@ Route::group(['middleware' => 'auth'], function(){
         //View Profile
         Route::get('profile/{id}', 'ProfileController@index');
 
+        //Search Thread and Reply by User
+        Route::get('profile/{id}/search', 'SearchController@searchByUser');
+
         //Control Panel
         Route::group(['prefix' => 'cpanel'],function(){
             //Profile
@@ -62,22 +88,9 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::group(['middleware' => 'admin'], function () {
 
+    Route::get('/clear-cache', 'UtilityController@clearCache');
+
 });
 
 
-Route::get('/clear-cache', 'UtilityController@clearCache');
 
-// Login Routes...
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-// Registration Routes...
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
-
-// Password Reset Routes...
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');

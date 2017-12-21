@@ -26,17 +26,11 @@
                 <h2 class="forum-title">{{$topic->title}}</h2>
             </div>
 
-            <div class="search-box">
-                <form method="get" id="forum-search" action="">
-                    {{ csrf_field() }}
-                    <fieldset>
-                        <input class="inputbox search" type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this forum…" />
-                        <button class="button" type="submit" title="Search"><i class="fa fa-search"></i></button>
-                    </fieldset>
-                </form>
-            </div>
+            @include('partials.search-tool', ['topic_id' => $topic->id])
+        </div>
+    </div>
 
-            <div id="wrap-body">
+    <div id="wrap-body">
 
                 <div class="chunk-main">
                     <div class="action-bar top">
@@ -224,15 +218,10 @@
                 </div>
             </div>
 
-        </div>
-
-        <div id="site-footer-area" class="site-footer-forum">
+    <div id="site-footer-area" class="site-footer-forum">
             <div class="chunk">
 
             </div>
         </div>
-
-    </div>
-
 
 @endsection

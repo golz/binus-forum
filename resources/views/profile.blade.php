@@ -85,7 +85,7 @@
                             <dl class="details">
                                 <dt>Joined:</dt> <dd>{{$user->created_at->format('d M Y, H:i')}}</dd>
                                 <dt>Total posts:</dt>
-                                <dd>{{$totalPost}} | <strong><a href="">Search user’s posts</a></strong>
+                                <dd>{{$totalPost}} | <strong><a href="{{ url('user/profile/'.$user->id.'/search') }}">Search user’s posts</a></strong>
                                     <br>({{$postPercentage}} posts per day)
                                 </dd>
                                 <dt>Most active topic:</dt> <dd><strong><a href="{{ url('topic/'.$mostActiveTopic->id) }}">{{$mostActiveTopic->title}}</a></strong><br>({{$mostActiveTopicThreadCount}} Thread / {{round($mostActiveTopicThreadCount / $totalPost * 100, 2)}}% of user’s posts)</dd>

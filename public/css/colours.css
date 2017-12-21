@@ -186,6 +186,35 @@ hr {
   border-color: rgba(0, 0, 0, 0.075);
   color: #46494f;
 }
+
+/**
+GD SEARCH TOOL
+ */
+.search-tool .inputbox,
+.search-tool .button {
+  background-color: rgba(0, 0, 0, 0.025);
+  border-color: rgba(0, 0, 0, 0.05);
+  color: #46494f;
+}
+.search-tool .inputbox:hover,
+.search-tool .inputbox:hover + .button {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.05);
+  color: #46494f;
+}
+.search-tool .button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.02);
+  color: #46494f;
+}
+.search-tool .inputbox:focus,
+.search-tool .inputbox:focus + .button,
+.search-tool .button:active {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.075);
+  color: #46494f;
+}
+
 /* Round cornered boxes and backgrounds
 ---------------------------------------- */
 #wrap {

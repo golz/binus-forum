@@ -59,7 +59,7 @@
                         <div class="inner">
 
                             <dl class="postprofile">
-                                <dt class="author">by <a href="{{ url('user/profile/'.$thread->user->id) }}" style="color: @if($thread->user->role->name == 'Administrator') #AA0000 @elseif($thread->topic->topicModerators->find($thread->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$thread->user->nickname}}</a></dt>
+                                <dt class="author">by <a href="{{ url('user/profile/'.$thread->user->id) }}" style="color: @if($thread->user->role->name == 'Administrator') #AA0000 @elseif($thread->topic->topicModerators->where('user_id', $thread->user->id)->count() > 0) #00AA00 @endif ;" class="username-coloured">{{$thread->user->nickname}}</a></dt>
                                 <dd class="search-result-date">{{$thread->user->created_at->format('d M Y, H:i')}}</dd>
                                 <dd>Topic: <a href="{{ url('topic/'.$thread->topic->id) }}">{{$thread->topic->title}}</a></dd>
                                 <dd>Thread: <a href="{{ url('topic/'.$thread->topic->id.'/thread/'.$thread->id) }}">{{$thread->title}}</a></dd>
@@ -91,7 +91,7 @@
                         <div class="inner">
 
                             <dl class="postprofile">
-                                <dt class="author">by <a href="{{ url('user/profile/'.$reply->user->id) }}" style="color: @if($reply->user->role->name == 'Administrator') #AA0000 @elseif($reply->thread->topic->topicModerators->find($reply->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$thread->user->nickname}}</a></dt>
+                                <dt class="author">by <a href="{{ url('user/profile/'.$reply->user->id) }}" style="color: @if($reply->user->role->name == 'Administrator') #AA0000 @elseif($reply->thread->topic->topicModerators->where('user_id', $reply->user->id)->count() > 0) #00AA00 @endif ;" class="username-coloured">{{$thread->user->nickname}}</a></dt>
                                 <dd class="search-result-date">{{$reply->user->created_at->format('d M Y, H:i')}}</dd>
                                 <dd>Topic: <a href="{{ url('topic/'.$reply->thread->topic->id) }}">{{$reply->thread->topic->title}}</a></dd>
                                 <dd>Thread: <a href="{{ url('topic/'.$reply->thread->topic->id.'/thread/'.$reply->thread->id) }}">{{$reply->thread->title}}</a></dd>

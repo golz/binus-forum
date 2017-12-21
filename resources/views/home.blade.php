@@ -161,7 +161,7 @@
                                             </a>
                                             <br />
                                             by
-                                            <a href="{{ url('user/profile/'.$lastSubject->user->id) }}" style="color: @if($lastSubject->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($lastSubject->user->id) != null) #00AA00 @endif ;" class="username-coloured">{{$lastSubject->user->nickname}}</a>
+                                            <a href="{{ url('user/profile/'.$lastSubject->user->id) }}" style="color: @if($lastSubject->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->where('user_id', $lastSubject->user->id)->count() > 0) #00AA00 @endif ;" class="username-coloured">{{$lastSubject->user->nickname}}</a>
                                             {{$lastSubject->updated_at->format('d M Y, H:i')}}
                                         </dd>
                                     </dl>

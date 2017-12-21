@@ -68,7 +68,7 @@
                                 </dd>
                             </dl>
 
-                            @if(Auth::user()->role->name == 'Administrator' || $topic->topicModerators->find(Auth::user()->id) != null)
+                            @if(Auth::user()->role->name == 'Administrator' || $topic->topicModerators->where('user_id', Auth::user()->id)->count() > 0)
                                 <dd style="clear: left;">
                                 <dt></dt>
                                 <dd><input type="checkbox" name="is_announcement" id="is_announcement" @if($thread->is_announcement == true) checked @endif />

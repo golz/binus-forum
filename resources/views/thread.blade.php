@@ -71,7 +71,7 @@
                             <dt class="has-profile-rank has-avatar">
                             <div class="avatar-container">
                                 <a href="" class="avatar"><img class="avatar" src="{{ asset('uploads/profile/'.$thread->user->image) }}" width="80" height="80" alt="User avatar" /></a>																				</div>
-                            <a href="{{ url('user/profile/'.$thread->user->id) }}" style="color: @if($thread->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($thread->user->id) != null) #00AA00 @endif ;" class="username-coloured">
+                            <a href="{{ url('user/profile/'.$thread->user->id) }}" style="color: @if($thread->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->where('user_id', $thread->user->id)->count() > 0) #00AA00 @endif ;" class="username-coloured">
                                 {{$thread->user->nickname}}
                             </a>
                             </dt>
@@ -79,7 +79,7 @@
                             <dd class="profile-rank">
                                 @if($thread->user->role->name == 'Administrator')
                                     Administrator
-                                @elseif($topic->topicModerators->find($thread->user->id))
+                                @elseif($topic->topicModerators->where('user_id', $thread->user->id)->count() > 0)
                                     Moderator
                                 @endif
                             </dd>
@@ -107,7 +107,7 @@
 
                                 <ul class="posts-buttons">
                                     @if(Auth::check() && $thread->status != 'close')
-                                        @if(Auth::user()->role->name == 'Administrator' || $topic->topicModerators->find($thread->user->id) != null)
+                                        @if(Auth::user()->role->name == 'Administrator' || $topic->topicModerators->where('user_id', Auth::user()->id)->count() > 0)
                                             <li>
                                                 <a href="{{ url('topic/'.$topic->id.'/thread/'.$thread->id.'/close') }}" title="Close this thread"><i class="fa fa-crosshairs"></i><span>Close this thread</span></a>
                                             </li>
@@ -155,7 +155,7 @@
                             <dt class="has-profile-rank has-avatar">
                             <div class="avatar-container">
                                 <a href="" class="avatar"><img class="avatar" src="{{ asset('uploads/profile/'.$reply->user->image) }}" width="80" height="80" alt="User avatar" /></a>																				</div>
-                            <a href="{{ url('user/profile/'.$reply->user->id) }}" style="color: @if($reply->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->find($reply->user->id) != null) #00AA00 @endif ;" class="username-coloured">
+                            <a href="{{ url('user/profile/'.$reply->user->id) }}" style="color: @if($reply->user->role->name == 'Administrator') #AA0000 @elseif($topic->topicModerators->where('user_id', $reply->user->id)->count() > 0) #00AA00 @endif ;" class="username-coloured">
                                 {{$reply->user->nickname}}
                             </a>
                             </dt>
@@ -163,7 +163,7 @@
                             <dd class="profile-rank">
                                 @if($reply->user->role->name == 'Administrator')
                                     Administrator
-                                @elseif($topic->topicModerators->find($reply->user->id))
+                                @elseif($topic->topicModerators->where('user_id', $reply->user->id)->count() > 0)
                                     Moderator
                                 @endif
                             </dd>

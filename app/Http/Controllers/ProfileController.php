@@ -20,7 +20,7 @@ class ProfileController extends Controller
         $topics = Topic::all();
         $isModerator = false;
         foreach($topics as $topic) {
-            if ($topic->topicModerators->find($id) != null){
+            if ($topic->topicModerators->where('user_id', $id)->count() > 0){
                 $isModerator = true;
             }
         }
@@ -50,7 +50,8 @@ class ProfileController extends Controller
             }
         }
 
-        return view('profile', compact('user', 'isModerator', 'totalPost', 'postPercentage', 'mostActiveTopic', 'mostActiveTopicThreadCount', 'mostActiveThread', 'mostActiveThreadReplyCount'));
+
+        return view('profile', compact('user', 'topics', 'isModerator', 'totalPost', 'postPercentage', 'mostActiveTopic', 'mostActiveTopicThreadCount', 'mostActiveThread', 'mostActiveThreadReplyCount'));
     }
 
     public function getPostPercentage($user){

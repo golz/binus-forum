@@ -30,7 +30,7 @@
 
     <div id="wrap-body">
         <div class="chunk">
-            <form id="viewprofile">
+            <div id="viewprofile">
                 <div class="panel bg1">
                     <div class="inner">
 
@@ -65,6 +65,33 @@
                             <dd>
                                 <span><a href="{{ url('user/cpanel/profile/'.Auth::user()->id) }}">[edit profile]</a></span>
                             </dd>
+                            @if($user->topicModerators->count() > 0)
+                                <dt>Moderators:</dt>
+                                <dd>
+                                    <span>
+                                        @foreach($user->topicModerators as $topicModerator)
+                                            {{$topicModerator->topic->title}} <a href="{{ url('user/'.$user->id.'/removeModerator?topic_id='.$topicModerator->topic->id) }}"><i class="fa fa-remove"></i></a>,
+                                        @endforeach
+                                    </span>
+                                </dd>
+                            @endif
+
+                            <dt>&nbsp;</dt>
+                            @if(Auth::user()->role->id == 1 && $user->role->id != 1)
+                                <form method="post" action="{{ url('user/'.$user->id.'/addModerator') }}">
+                                    {{ csrf_field() }}
+                                    <dd>
+                                        <select name="topic_id">
+                                            @foreach($topics as $topic)
+                                                @if($topic->topicModerators->where('user_id', $user->id)->count() == 0)
+                                                    <option value="{{$topic->id}}" >{{$topic->title}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                        <input type="submit" name="submit" value="Go" class="button2">
+                                    </dd>
+                                </form>
+                            @endif
                         </dl>
 
                     </div>
@@ -108,7 +135,7 @@
                 </div>
                 @endif
                 <div></div>
-            </form>
+            </div>
 
 
         </div>

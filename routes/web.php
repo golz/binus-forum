@@ -88,6 +88,10 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::group(['middleware' => 'admin'], function () {
 
+    //Change Role
+    Route::post('user/{id}/addModerator', 'AdminController@addModerator');
+    Route::get('user/{id}/removeModerator', 'AdminController@removeModerator');
+
     Route::get('/clear-cache', 'UtilityController@clearCache');
 
 });

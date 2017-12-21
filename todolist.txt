@@ -1,3 +1,0 @@
-2. Private message between user
-3. Realtime chat (box)
-4. Set moderator

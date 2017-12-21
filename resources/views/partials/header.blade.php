@@ -56,20 +56,20 @@
                     </li>
                 @endguest
 
-                <li class="font-icon dropdown-container" data-skip-responsive="true">
-                    <a href="./search.php?style=5" class="dropdown-trigger"><i class="fa fa-search"></i></a>
-                    <div class="dropdown hidden">
-                        <div class="pointer"><div class="pointer-inner"></div></div>
-                        <div id="site-search" class="dropdown-contents">
-                            <form action="./search.php?style=5" method="get">
-                                <fieldset>
-                                    <input name="keywords" type="search" maxlength="128" title="Search for keywords" size="20" value="" placeholder="Search" /><button type="submit" title="Search"><i class="fa fa-search"></i></button><input type="hidden" name="style" value="5" />
+                {{--<li class="font-icon dropdown-container" data-skip-responsive="true">--}}
+                    {{--<a href="./search.php?style=5" class="dropdown-trigger"><i class="fa fa-search"></i></a>--}}
+                    {{--<div class="dropdown hidden">--}}
+                        {{--<div class="pointer"><div class="pointer-inner"></div></div>--}}
+                        {{--<div id="site-search" class="dropdown-contents">--}}
+                            {{--<form action="{{  }}" method="get">--}}
+                                {{--<fieldset>--}}
+                                    {{--<input name="keyword" type="search" maxlength="128" title="Search for keywords" size="20" value="" placeholder="Search" /><button type="submit" title="Search"><i class="fa fa-search"></i></button><input type="hidden" name="style" value="5" />--}}
 
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </li>
+                                {{--</fieldset>--}}
+                            {{--</form>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</li>--}}
 
             </ul>
 

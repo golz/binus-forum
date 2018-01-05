@@ -43,11 +43,13 @@ class ThreadController extends Controller
         $replies = $replies->paginate($this->paginateLimit);
 
         //Increase View Count
-        if(!$request->session()->has('SESSION' . Auth::user()->id . 'THREAD' . $thread->id)) {
-            $request->session()->put('SESSION' . Auth::user()->id . 'THREAD' . $thread->id, Auth::user()->id);
-            $thread->view += 1;
-            $thread->save();
-        }
+		if(Auth::check()){
+			if(!$request->session()->has('SESSION' . Auth::user()->id . 'THREAD' . $thread->id)) {
+				$request->session()->put('SESSION' . Auth::user()->id . 'THREAD' . $thread->id, Auth::user()->id);
+				$thread->view += 1;
+				$thread->save();
+			}
+		}
 
         return view('thread', compact('topic', 'thread', 'replies'));
     }

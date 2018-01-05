@@ -63,7 +63,11 @@
                             </dd>
                             <dt>&nbsp;</dt>
                             <dd>
-                                <span><a href="{{ url('user/cpanel/profile/'.Auth::user()->id) }}">[edit profile]</a></span>
+								@if(Auth::check())
+									@if($user->id == Auth::user()->id)
+										<span><a href="{{ url('user/cpanel/profile/') }}">[edit profile]</a></span>
+									@endif
+								@endif
                             </dd>
                             @if($user->topicModerators->count() > 0)
                                 <dt>Moderators:</dt>

@@ -57,7 +57,7 @@
 
                 <div class="pagination">
                     {{$thread->replies->count()}} replies
-                    &bull; Page <strong> {{$replies->currentPage()}} </strong> of <strong> {{ $replies->total()>0?$replies->total():1 }}</strong>
+                    &bull; Page <strong> {{$replies->currentPage()}} </strong> of <strong> {{ $replies->lastPage() }}</strong>
                     <br>
                     {!! $replies->appends(Request::except('page'))->render() !!}
                 </div>
@@ -296,7 +296,7 @@
 
                 <div class="pagination">
                     {{$thread->replies->count()}} replies
-                    &bull; Page <strong> {{$replies->currentPage()}} </strong> of <strong> {{ $replies->total()>0?$replies->total():1 }}</strong>
+                    &bull; Page <strong> {{$replies->currentPage()}} </strong> of <strong> {{ $replies->lastPage() }}</strong>
                     <br>
                     {!! $replies->appends(Request::except('page'))->render() !!}
                 </div>

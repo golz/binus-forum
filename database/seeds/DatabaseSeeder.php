@@ -30,19 +30,19 @@ class DatabaseSeeder extends Seeder
             'role_id' => 1,
             'signature_id' => 1,
             'fullname' => 'Goldwin Japar',
-            'nickname' => 'golz',
-            'nim' => '1901472631',
-            'email' => 'golzwinsjapar@gmail.com',
-            'dob' => '1998/02/15',
+            'nickname' => 'goldwin.japar',
+            'nim' => $faker->creditCardNumber(),
+            'email' => 'goldwin.japar@gmail.com',
+            'dob' => '1997/02/20',
             'image' => 'default.jpg',
             'password' => bcrypt('asdasd123123')
         ]);
         User::create([
             'role_id' => 1,
             'fullname' => 'Nicholas Krisna Putratama Lusianto',
-            'nickname' => 'Zephkiel',
-            'nim' => '1901487596',
-            'email' => 'nicholaskrisnapl@gmail.com',
+            'nickname' => 'nicholas.krisna',
+            'nim' => $faker->creditCardNumber(),
+            'email' => 'nicholas.krisna@gmail.com',
             'dob' => '1997/06/01',
             'image' => 'default.jpg',
             'password' => bcrypt('asdasd123123')
@@ -50,28 +50,28 @@ class DatabaseSeeder extends Seeder
         User::create([
             'role_id' => 2,
             'fullname' => 'Jefry',
-            'nickname' => 'jeffchange',
-            'nim' => '1901500585',
-            'email' => 'jeffry.chang70@gmail.com',
+            'nickname' => 'jeffry.binus',
+            'nim' => $faker->creditCardNumber(),
+            'email' => 'jeffry@gmail.com',
             'dob' => '1996/10/21',
             'image' => 'default.jpg',
             'password' => bcrypt('asdasd123123')
         ]);
         User::create([
             'role_id' => 2,
-            'fullname' => 'Luciana Dian Santami',
-            'nickname' => 'luciana_lim',
-            'nim' => '1901460240',
-            'email' => 'lucianaleminho@gmail.com',
-            'dob' => '1997/04/17',
+            'fullname' => 'Luciana Santami',
+            'nickname' => 'luciana.santami',
+            'nim' => $faker->creditCardNumber(),
+            'email' => 'luciana.santami@gmail.com',
+            'dob' => '1996/05/20',
             'image' => 'default.jpg',
             'password' => bcrypt('asdasd123123')
         ]);
         User::create([
             'role_id' => 2,
             'fullname' => 'Misita Pontiasa',
-            'nickname' => 'misitasasa',
-            'nim' => '1901460240',
+            'nickname' => 'misita.pontiasa',
+            'nim' => $faker->creditCardNumber(),
             'email' => 'misita.pontiasa@gmail.com',
             'dob' => '1996/12/17',
             'image' => 'default.jpg',
@@ -80,8 +80,8 @@ class DatabaseSeeder extends Seeder
         User::create([
             'role_id' => 2,
             'fullname' => 'William',
-            'nickname' => 'Yoda',
-            'nim' => '1801415886',
+            'nickname' => 'william.anggrek',
+            'nim' => $faker->creditCardNumber(),
             'email' => 'william@binus.edu',
             'dob' => '1995/12/17',
             'image' => 'default.jpg',
@@ -96,6 +96,7 @@ class DatabaseSeeder extends Seeder
 //      Type
         Type::create(['name' => 'General']);
         Type::create(['name' => 'Department']);
+        Type::create(['name' => 'University']);
 
 //      Topic
         Topic::create([
@@ -110,37 +111,77 @@ class DatabaseSeeder extends Seeder
         ]);
         Topic::create([
             'type_id' => 2,
-            'title' => 'Faculty of Engineering',
+            'title' => 'Departemen Agama',
             'description' => $faker->text($maxNbChars = 40)
         ]);
         Topic::create([
             'type_id' => 2,
-            'title' => 'Faculty of Humanities',
+            'title' => 'Departemen Dalam Negeri',
             'description' => $faker->text($maxNbChars = 40)
         ]);
         Topic::create([
             'type_id' => 2,
-            'title' => 'School of Computer Science',
+            'title' => 'Departemen Kesehatan',
             'description' => $faker->text($maxNbChars = 40)
         ]);
         Topic::create([
             'type_id' => 2,
-            'title' => 'School of Information Systems',
+            'title' => 'Departemen Kesehatan',
             'description' => $faker->text($maxNbChars = 40)
         ]);
         Topic::create([
             'type_id' => 2,
-            'title' => 'School of Business Management',
+            'title' => 'Departemen Luar Negeri',
             'description' => $faker->text($maxNbChars = 40)
         ]);
         Topic::create([
             'type_id' => 2,
-            'title' => 'School of Design',
+            'title' => 'Departemen Pertanian',
             'description' => $faker->text($maxNbChars = 40)
         ]);
         Topic::create([
             'type_id' => 2,
-            'title' => 'Graduate Program',
+            'title' => 'Departemen Pertahanan',
+            'description' => $faker->text($maxNbChars = 40)
+        ]);
+        Topic::create([
+            'type_id' => 2,
+            'title' => 'Departemen Kehutanan',
+            'description' => $faker->text($maxNbChars = 40)
+        ]);
+        Topic::create([
+            'type_id' => 2,
+            'title' => 'Departemen Perhubungan',
+            'description' => $faker->text($maxNbChars = 40)
+        ]);
+        Topic::create([
+            'type_id' => 2,
+            'title' => 'Departemen Sosial',
+            'description' => $faker->text($maxNbChars = 40)
+        ]);
+        Topic::create([
+            'type_id' => 3,
+            'title' => 'Bina Nusantara University (BINUS)',
+            'description' => $faker->text($maxNbChars = 40)
+        ]);
+        Topic::create([
+            'type_id' => 3,
+            'title' => 'Universitas Indonesia (UI)',
+            'description' => $faker->text($maxNbChars = 40)
+        ]);
+        Topic::create([
+            'type_id' => 3,
+            'title' => 'Institut Teknologi Bandung (ITB)',
+            'description' => $faker->text($maxNbChars = 40)
+        ]);
+        Topic::create([
+            'type_id' => 3,
+            'title' => 'Gunadarma',
+            'description' => $faker->text($maxNbChars = 40)
+        ]);
+        Topic::create([
+            'type_id' => 3,
+            'title' => 'Universitas Gadjah Mada',
             'description' => $faker->text($maxNbChars = 40)
         ]);
 
@@ -148,7 +189,7 @@ class DatabaseSeeder extends Seeder
         Thread::create([
             'topic_id' => 1,
             'user_id' => 2,
-            'title' => 'Pengumuman PKM-KC dan PKM-K',
+            'title' => 'Pengumuman Pembuatan e-KTP dan cara melakukan pendaftaran',
             'content' => $faker->realText(),
             'view' => $faker->numberBetween($min = 0, $max = 10),
             'rating' => $faker->numberBetween($min = 0, $max = 5),

@@ -24,7 +24,7 @@
             {{--Begin Sidebar--}}
             <div id="sidebar">
                 <div class="side-block">
-                    <img src="{{ asset('images/greater-nusantara.png') }}" alt="Greater Nusantara" style="border-radius: 3px;padding:30px;filter:grayscale(100%);">
+                    <img src="{{ asset('images/greater-nusantara.png') }}" alt="Greater Nusantara" style="border-radius: 3px;padding:30px;filter:grayscale(0%);">
                 </div>
 
                 @if(!Auth::check())
@@ -212,7 +212,7 @@
 
                 <div class="grid-3">
                     <h5>About us</h5>
-                    <p><strong>BIFOR</strong> was formed as a forum for discussion to the Bina Nusantara University's students to discuss the information being trending at the time, these things can be tasks, important information such as events, and so forth. <br /> <br /> In addition to acting as a means of communication among students, they can also see direct notifications from each department so that the information provided is very accurate and does not cause confusion that often occurs in our beloved university and there is also a feature to view the schedule of each lecture.</p>
+                    <p><strong>BIFOR</strong> was formed as a forum for discussion between students and the community in discussing information that was trending at the time, these things could be important announcements, social activities, assignments, events, and so on. <br /> <br /> In addition to acting as a means of communication between communities, they can also see notifications directly from each department so that the information provided is very accurate and does not cause confusion that often occurs in beloved Indonesia. In addition, this forum can also reduce false information or hoaxes that are often spread among the public.</p>
                 </div>
                 <div class="grid-3">
                     <h5>You Must Know</h5>

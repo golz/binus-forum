@@ -15,7 +15,7 @@
   background-color: #e7e7e7;
 }
 #site-header {
-  background-color: #46494f;
+  background-color: #2569b5;
 }
 #site-menu > li > a {
   color: #DCDCDC;
@@ -78,7 +78,7 @@
 }
 #site-footer-nav,
 #site-footer {
-  background-color: #46494f;
+  background-color: #2569b5;
 }
 #site-footer-area {
   background-color: #FFF;
@@ -226,11 +226,11 @@ GD SEARCH TOOL
   color: #46494f;
 }
 #page-footer {
-  background-color: #46494f;
+  background-color: #2569b5;
 }
 .forabg .header,
 .forumbg .header {
-  background-color: #46494f;
+  background-color: #2569b5;
 }
 .forabg .row,
 .forumbg .row {
@@ -251,7 +251,7 @@ GD SEARCH TOOL
   background-color: #FAFAFA;
 }
 #qr_postform > .panel {
-  background-color: #46494f;
+  background-color: #2569b5;
 }
 .post {
   background-color: #FFF;
@@ -310,7 +310,7 @@ ul.navlinks {
 /* Table styles
 ----------------------------------------*/
 table.table1 thead th {
-  background-color: #46494f;
+  background-color: #2569b5;
   color: #e7e7e7;
 }
 table.table1 thead a {
@@ -445,7 +445,7 @@ p.post-notice a {
   color: #FAFAFA;
 }
 .stat-block {
-  background-color: #46494f;
+  background-color: #2569b5;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 .stat-block > h3,
@@ -489,7 +489,7 @@ th a:hover {
   color: #fafafa;
 }
 .dropdown-extended a.mark_read:hover {
-  background-color: #46494f;
+  background-color: #2569b5;
   color: #fafafa;
 }
 a.forumtitle,
@@ -514,10 +514,10 @@ a.lastsubject {
 }
 /* Back to top of page */
 a.top {
-  background-image: url("images/icon_back_top.gif");
+  /*background-image: url("images/icon_back_top.gif");*/
 }
 a.top2 {
-  background-image: url("images/icon_back_top.gif");
+  /*background-image: url("images/icon_back_top.gif");*/
 }
 /* Arrow links  */
 a.arrow-up:hover {
@@ -758,7 +758,7 @@ Colours and backgrounds for buttons.css
 .button:active,
 .dropdown-visible .dropdown-select,
 .nojs .dropdown-container:active .dropdown-select {
-  background-color: #46494f;
+  background-color: #2569b5;
   border-color: #46494f;
   color: #e7e7e7;
 }
@@ -839,7 +839,7 @@ Colours and backgrounds for buttons.css
   color: #999;
 }
 .chosen-container-multi .chosen-choices li.search-choice {
-  border-color: 1px solid #AAA;
+  border: 1px solid #AAA;
   background-color: #EEE;
   box-shadow: 0 0 2px #ffffff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
   color: #333;
@@ -1204,10 +1204,10 @@ input.disabled {
   color: #46494f;
 }
 #darken {
-  background-color: #46494f;
+  background-color: #2569b5;
 }
 #loading_indicator {
-  background-color: #46494f;
+  background-color: #2569b5;
   box-shadow: 0 0 50px #46494f;
   color: #fafafa;
 }
